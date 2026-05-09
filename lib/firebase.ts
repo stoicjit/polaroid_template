@@ -3,21 +3,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
-function getEnv(name: string): string {
-  const value = process.env[name];
-  if (!value) {
-    throw new Error(`Missing required Firebase env var: ${name}`);
-  }
-  return value;
-}
-
 const firebaseConfig = {
-  apiKey: getEnv("NEXT_PUBLIC_FIREBASE_API_KEY"),
-  authDomain: getEnv("NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN"),
-  projectId: getEnv("NEXT_PUBLIC_FIREBASE_PROJECT_ID"),
-  storageBucket: getEnv("NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET"),
-  messagingSenderId: getEnv("NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID"),
-  appId: getEnv("NEXT_PUBLIC_FIREBASE_APP_ID"),
+  apiKey: "AIzaSyBi8vmnzItX6TODb0EkVcH-6LJVDjO8axE",
+  authDomain: "wedding-memory-app-46ee4.firebaseapp.com",
+  projectId: "wedding-memory-app-46ee4",
+  storageBucket: "wedding-memory-app-46ee4.firebasestorage.app",
+  messagingSenderId: "566067509613",
+  appId: "1:566067509613:web:7f791b2ca2494126990264",
 };
 
 const app = initializeApp(firebaseConfig);
