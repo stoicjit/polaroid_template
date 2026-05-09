@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "title": "Mariage d'Idan et Gurdeep",
+    "description": "Bienvenue a la celebration"
+  },
+  "common": {
+    "languageLabel": "Langue",
+    "english": "Anglais",
+    "french": "Francais",
+    "punjabi": "Punjabi",
+    "hebrew": "Hebreu"
+  },
+  "welcome": {
+    "eyebrow": "Bienvenue a la celebration de",
+    "welcomeText": "Nous sommes tres heureux de vous avoir avec nous ce soir.",
+    "subText": "Cette petite appli nous aidera a capturer nos souvenirs toute la soiree - chaque instant, chaque rire, chaque moment.",
+    "dateText": "Septembre 2026",
+    "enter": "Entrer",
+    "photoAlt": "Idan et Gurdeep"
+  },
+  "instructions": {
+    "title": "Comment ca marche",
+    "body": "Televersez jusqu'a 20 photos de l'evenement. Tout le monde peut voir les souvenirs partages en temps reel.",
+    "enterEvent": "Entrer dans l'evenement"
+  },
+  "nameGate": {
+    "placeholder": "Votre nom",
+    "save": "Enregistrer"
+  },
+  "app": {
+    "loading": "Chargement...",
+    "placeholder": "Les souvenirs partages apparaitront bientot ici."
+  },
+  "upload": {
+    "upload": "Televerser"
+  }
+}

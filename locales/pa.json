@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "title": "Idan ate Gurdeep da Viyah",
+    "description": "Jashan vich tuhadda swaagat hai"
+  },
+  "common": {
+    "languageLabel": "Bhasha",
+    "english": "Angrezi",
+    "french": "French",
+    "punjabi": "Punjabi",
+    "hebrew": "Ibrani"
+  },
+  "welcome": {
+    "eyebrow": "de jashan vich tuhadda swaagat hai",
+    "welcomeText": "Aj raat sade naal hon lai bahut khushi hai.",
+    "subText": "Eh chhoti app naal asi raat bhar dian yaadan ikathian karange - har candid, har hassa, har pal.",
+    "dateText": "September 2026",
+    "enter": "Andar jao",
+    "photoAlt": "Idan ate Gurdeep"
+  },
+  "instructions": {
+    "title": "Eh kiven kam karda hai",
+    "body": "Event ton vadh ton vadh 20 photoan upload karo. Sab lok sanjhian yaadan turant dekh sakde han.",
+    "enterEvent": "Event vich dakhil hovo"
+  },
+  "nameGate": {
+    "placeholder": "Tuhada naam",
+    "save": "Sambhalo"
+  },
+  "app": {
+    "loading": "Load ho reha hai...",
+    "placeholder": "Sanjhian yaadan jaldi ithe nazar aaungan."
+  },
+  "upload": {
+    "upload": "Upload"
+  }
+}

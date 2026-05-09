@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "title": "HaChatuna shel Idan veGurdeep",
+    "description": "Brukhim haba'im laChagiga"
+  },
+  "common": {
+    "languageLabel": "Safa",
+    "english": "Anglit",
+    "french": "Tzarfatit",
+    "punjabi": "Punjabit",
+    "hebrew": "Ivrit"
+  },
+  "welcome": {
+    "eyebrow": "Brukhim haba'im laChagiga shel",
+    "welcomeText": "Sameachim she'atem itanu ha'erev.",
+    "subText": "Ha'aplikatzia hazot ta'azor lanu lishmor zikhronot beyachad kol ha'erev - kol rega, kol tzchok, kol tmuna.",
+    "dateText": "September 2026",
+    "enter": "Knisa",
+    "photoAlt": "Idan veGurdeep"
+  },
+  "instructions": {
+    "title": "Eich ze oved",
+    "body": "Ha'alu ad 20 tmynot meha'irua. Kulam yekholim lirot et hazikhronot ha'meshutafim bizman emet.",
+    "enterEvent": "Knisa la'irua"
+  },
+  "nameGate": {
+    "placeholder": "Hashem shelkha",
+    "save": "Shmira"
+  },
+  "app": {
+    "loading": "Toen...",
+    "placeholder": "Hazikhronot ha'meshutafim yofi'u kan bekarov."
+  },
+  "upload": {
+    "upload": "Ha'ala"
+  }
+}

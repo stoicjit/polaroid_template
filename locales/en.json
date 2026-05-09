@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "title": "Idan & Gurdeep's Wedding",
+    "description": "Welcome to the celebration"
+  },
+  "common": {
+    "languageLabel": "Language",
+    "english": "English",
+    "french": "French",
+    "punjabi": "Punjabi",
+    "hebrew": "Hebrew"
+  },
+  "welcome": {
+    "eyebrow": "Welcome to the celebration of",
+    "welcomeText": "So glad you're here with us tonight.",
+    "subText": "This little app is how we'll capture memories together through the night - every candid, every laugh, every moment.",
+    "dateText": "September 2026",
+    "enter": "Enter",
+    "photoAlt": "Idan and Gurdeep"
+  },
+  "instructions": {
+    "title": "How it works",
+    "body": "Upload up to 20 photos from the event. Everyone can see shared memories in real time.",
+    "enterEvent": "Enter Event"
+  },
+  "nameGate": {
+    "placeholder": "Your name",
+    "save": "Save"
+  },
+  "app": {
+    "loading": "Loading...",
+    "placeholder": "Shared memories will appear here soon."
+  },
+  "upload": {
+    "upload": "Upload"
+  }
+}
