@@ -12,10 +12,26 @@
   },
   "welcome": {
     "eyebrow": "de jashan vich tuhadda swaagat hai",
-    "welcomeText": "Aj raat sade naal hon lai bahut khushi hai.",
-    "subText": "Eh chhoti app naal asi raat bhar dian yaadan ikathian karange - har candid, har hassa, har pal.",
+    "landingText": "Aj raat layi ik chhota photo space.",
+    "landingSubText": "Ik vaar install karo, fer home screen ton khol ke full experience lo.",
     "dateText": "September 2026",
     "enter": "Andar jao",
+    "enterApp": "App kholo",
+    "installBadge": "Pehlaan install karo",
+    "installHint": "Wiah wali app nu home screen te rakho, taan experience smooth rahe.",
+    "installDescription": "Tuhada browser eh app ithe hi install kar sakda hai.",
+    "installCta": "App install karo",
+    "iosInstallHint": "iPhone te share sheet kholo te Add to Home Screen chuno.",
+    "iosShareLabel": "Safari Share",
+    "iosStepOne": "Safari vich Share button te tap karo.",
+    "iosStepTwo": "Add to Home Screen chuno.",
+    "iosStepThree": "Nave icon ton app kholo.",
+    "greetingEyebrow": "Swagat hai",
+    "greetingText": "Assi tuhanu dekh ke bahut khush haan.",
+    "greetingSubText": "Apna naam add karo taan jo tuhade photos poori raat tuhade naal jure rahen.",
+    "noteOne": "Har bande lai max 30 photos.",
+    "noteTwo": "Tusi har photo te ik note v jod sakde ho.",
+    "enterEvent": "Andar jao",
     "photoAlt": "Idan ate Gurdeep"
   },
   "instructions": {
@@ -36,7 +52,7 @@
     "loading": "Load ho reha hai...",
     "placeholder": "Sanjhian yaadan jaldi ithe nazar aaungan.",
     "linkedTo": "Photoan {name} naal juriyaan jaan giyaan.",
-    "linkPrompt": "Instructions screen te apna naam pao taan jo photoan tuhade naal juriyaan hon."
+    "linkPrompt": "Apna naam greeting vich pao taan jo photoan tuhade naal juriyaan hon."
   },
   "upload": {
     "upload": "Upload"

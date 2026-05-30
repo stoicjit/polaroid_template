@@ -12,10 +12,26 @@
   },
   "welcome": {
     "eyebrow": "Welcome to the celebration of",
-    "welcomeText": "So glad you're here with us tonight.",
-    "subText": "This little app is how we'll capture memories together through the night - every candid, every laugh, every moment.",
+    "landingText": "A little photo space for tonight.",
+    "landingSubText": "Install it once, then reopen from your home screen for the full experience.",
     "dateText": "September 2026",
     "enter": "Enter",
+    "enterApp": "Enter app",
+    "installBadge": "Install first",
+    "installHint": "Keep the wedding app on your home screen for the smoothest experience.",
+    "installDescription": "Your browser can install this app right from here.",
+    "installCta": "Install app",
+    "iosInstallHint": "On iPhone, open the share sheet and choose Add to Home Screen.",
+    "iosShareLabel": "Safari Share",
+    "iosStepOne": "Tap the Share button in Safari.",
+    "iosStepTwo": "Choose Add to Home Screen.",
+    "iosStepThree": "Open the app from the new icon.",
+    "greetingEyebrow": "Welcome in",
+    "greetingText": "We're so happy you're here.",
+    "greetingSubText": "Add your name so your photos stay linked to you through the night.",
+    "noteOne": "Max 30 photos per person.",
+    "noteTwo": "You can add a note to any photo.",
+    "enterEvent": "Enter",
     "photoAlt": "Idan and Gurdeep"
   },
   "instructions": {
@@ -36,7 +52,7 @@
     "loading": "Loading...",
     "placeholder": "Shared memories will appear here soon.",
     "linkedTo": "Photos will be linked to {name}.",
-    "linkPrompt": "Add your name on the instructions screen so your photos are paired with you."
+    "linkPrompt": "Add your name in the greeting so your photos are paired with you."
   },
   "upload": {
     "upload": "Upload"

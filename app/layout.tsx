@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, DM_Sans, Imperial_Script } from "next/font/google";
 import { I18nProvider } from "@/components/I18nProvider";
 import LanguageSelector from "@/components/LanguageSelector";
+import ServiceWorkerRegistrar from "@/components/ServiceWorkerRegistrar";
 import en from "@/locales/en.json";
 import "../styles/globals.css";
 
@@ -56,6 +57,7 @@ export default function RootLayout({
       className={`${cormorantGaramond.variable} ${dmSans.variable} ${imperialScript.variable}`}
     >
       <body>
+        <ServiceWorkerRegistrar />
         <I18nProvider>
           <LanguageSelector />
           {children}

@@ -46,8 +46,71 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: min(92vw, 940px);
+  width: min(92vw, 920px);
+  gap: 14px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(24, 17, 11, 0.42);
+  backdrop-filter: blur(10px);
+}
+
+.sheet {
+  width: min(92vw, 420px);
+}
+
+.greetingSheet {
+  width: min(92vw, 520px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 30px;
+  background: rgba(255, 252, 247, 0.94);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
+  padding: 22px;
+  display: grid;
   gap: 18px;
+}
+
+.greetingPolaroids {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.greetingPolaroidWrap {
+  width: 124px;
+}
+
+.greetingCopy {
+  display: grid;
+  gap: 12px;
+  text-align: center;
+  justify-items: center;
+}
+
+.greetingNotes {
+  display: grid;
+  gap: 8px;
+  max-width: 30ch;
+}
+
+.greetingNote {
+  font-family: var(--font-cormorant);
+  font-size: clamp(1.15rem, 1.8vw, 1.7rem);
+  line-height: 1.15;
+  color: #4b3827;
+}
+
+.nameWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .eyebrow {
@@ -109,7 +172,7 @@
   opacity: 0.7;
 }
 
-.welcomeText {
+.landingText {
   font-family: var(--font-imperial-script);
   font-size: clamp(1.9rem, 2.8vw, 3.2rem);
   font-style: normal;
@@ -120,7 +183,7 @@
   text-wrap: balance;
 }
 
-.subText {
+.landingSubText {
   font-family: var(--font-cormorant);
   font-size: clamp(1.3rem, 1.9vw, 2.25rem);
   font-weight: 300;
@@ -162,4 +225,51 @@
 
 .enterBtn:active {
   opacity: 0.6;
+}
+
+.greetingEyebrow {
+  font-family: var(--font-dm-sans);
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #7b5d3c;
+}
+
+.greetingText {
+  font-family: var(--font-imperial-script);
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  line-height: 1.05;
+  color: #4f651d;
+}
+
+.greetingSubText {
+  font-family: var(--font-cormorant);
+  font-size: clamp(1.15rem, 1.8vw, 1.7rem);
+  line-height: 1.15;
+  color: #4b3827;
+  max-width: 26ch;
+}
+
+.greetingEnter {
+  font-family: var(--font-dm-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #faf7f2;
+  background: #1e140a;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 40px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.greetingEnter:hover {
+  opacity: 0.8;
+}
+
+.greetingEnter:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }

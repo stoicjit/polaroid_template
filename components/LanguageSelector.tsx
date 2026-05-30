@@ -16,7 +16,7 @@ export default function LanguageSelector() {
   ];
 
   return (
-    <div className="fixed z-50 top-4 right-4">
+    <div className="fixed z-[70] top-4 right-4">
       <button
         type="button"
         aria-label={t("common.languageLabel")}

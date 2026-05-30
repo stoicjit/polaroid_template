@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Mariage d'Idan et Gurdeep",
-    "description": "Bienvenue à la celebration"
+    "description": "Bienvenue a la celebration"
   },
   "common": {
     "languageLabel": "Langue",
@@ -11,11 +11,27 @@
     "hebrew": "Hebreu"
   },
   "welcome": {
-    "eyebrow": "Bienvenue à la celebration de",
-    "welcomeText": "Nous sommes tres heureux de vous avoir avec nous ce soir.",
-    "subText": "Cette petite appli nous aidera a capturer nos souvenirs toute la soiree - chaque instant, chaque rire, chaque moment.",
+    "eyebrow": "Bienvenue a la celebration de",
+    "landingText": "Un petit espace photo pour ce soir.",
+    "landingSubText": "Installez-le une fois, puis ouvrez-le depuis l'ecran d'accueil pour profiter pleinement de l'experience.",
     "dateText": "Septembre 2026",
     "enter": "Entrer",
+    "enterApp": "Entrer dans l'appli",
+    "installBadge": "Installer d'abord",
+    "installHint": "Gardez l'appli de mariage sur l'ecran d'accueil pour une experience plus fluide.",
+    "installDescription": "Votre navigateur peut installer cette appli directement ici.",
+    "installCta": "Installer l'appli",
+    "iosInstallHint": "Sur iPhone, ouvrez la feuille de partage puis choisissez Ajouter a l'ecran d'accueil.",
+    "iosShareLabel": "Partage Safari",
+    "iosStepOne": "Touchez le bouton Partager dans Safari.",
+    "iosStepTwo": "Choisissez Ajouter a l'ecran d'accueil.",
+    "iosStepThree": "Ouvrez l'appli depuis la nouvelle icone.",
+    "greetingEyebrow": "Bienvenue",
+    "greetingText": "Nous sommes tellement heureux de vous avoir ici.",
+    "greetingSubText": "Ajoutez votre nom pour que vos photos restent associees a vous toute la soiree.",
+    "noteOne": "30 photos max par personne.",
+    "noteTwo": "Vous pouvez ajouter une note a chaque photo.",
+    "enterEvent": "Entrer",
     "photoAlt": "Idan et Gurdeep"
   },
   "instructions": {
@@ -36,7 +52,7 @@
     "loading": "Chargement...",
     "placeholder": "Les souvenirs partages apparaitront bientot ici.",
     "linkedTo": "Les photos seront associees a {name}.",
-    "linkPrompt": "Ajoutez votre nom sur l'ecran d'instructions pour associer vos photos."
+    "linkPrompt": "Ajoutez votre nom dans le message d'accueil pour associer vos photos."
   },
   "upload": {
     "upload": "Televerser"
