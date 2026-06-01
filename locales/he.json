@@ -11,9 +11,9 @@
     "hebrew": "Ivrit"
   },
   "welcome": {
-    "eyebrow": "Brukhim haba'im laChagiga shel",
-    "landingText": "Merkaz katsar le-tmunot shel halaila.",
-    "landingSubText": "Hatzitzu oto pa'am achat, ve'az tiftchu oto meha'meshomekhet shel ha-bayit le-experience shlema.",
+    "eyebrow": "Brukhim haba'im laChagiga",
+    "landingText": "Ha-app shelkhem la-laila kedei litfos uleshatek rega'im, polaroid achad akhar ha-sheni.",
+    "landingSubText": "Galeria meshutefet shel rega'im polaroid.",
     "dateText": "September 2026",
     "enter": "Knisa",
     "enterApp": "Knsu la'app",

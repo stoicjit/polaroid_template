@@ -1,5 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, DM_Sans, Imperial_Script } from "next/font/google";
+import {
+  Allura,
+  Cormorant_Garamond,
+  DM_Sans,
+  Great_Vibes,
+  Imperial_Script,
+  Parisienne,
+} from "next/font/google";
 import { I18nProvider } from "@/components/I18nProvider";
 import LanguageSelector from "@/components/LanguageSelector";
 import ServiceWorkerRegistrar from "@/components/ServiceWorkerRegistrar";
@@ -20,6 +27,24 @@ const imperialScript = Imperial_Script({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-imperial-script",
+});
+
+const allura = Allura({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-allura",
+});
+
+const parisienne = Parisienne({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-parisienne",
+});
+
+const greatVibes = Great_Vibes({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-great-vibes",
 });
 
 export const metadata: Metadata = {
@@ -54,7 +79,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorantGaramond.variable} ${dmSans.variable} ${imperialScript.variable}`}
+      className={`${cormorantGaramond.variable} ${dmSans.variable} ${imperialScript.variable} ${allura.variable} ${parisienne.variable} ${greatVibes.variable}`}
     >
       <body>
         <ServiceWorkerRegistrar />

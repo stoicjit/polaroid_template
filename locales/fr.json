@@ -11,12 +11,12 @@
     "hebrew": "Hebreu"
   },
   "welcome": {
-    "eyebrow": "Bienvenue a la celebration de",
-    "landingText": "Un petit espace photo pour ce soir.",
-    "landingSubText": "Installez-le une fois, puis ouvrez-le depuis l'ecran d'accueil pour profiter pleinement de l'experience.",
+    "eyebrow": "Bienvenue a la celebration",
+    "landingText": "Votre appli pour la soiree pour capturer et partager les moments, une photo polaroid a la fois.",
+    "landingSubText": "Une galerie partagee de moments polaroid.",
     "dateText": "Septembre 2026",
     "enter": "Entrer",
-    "enterApp": "Entrer dans l'appli",
+    "enterApp": "Entrer l'appli",
     "installBadge": "Installer d'abord",
     "installHint": "Gardez l'appli de mariage sur l'ecran d'accueil pour une experience plus fluide.",
     "installDescription": "Votre navigateur peut installer cette appli directement ici.",

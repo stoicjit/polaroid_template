@@ -22,10 +22,12 @@ const polaroids: Array<{
   left?: string;
   right?: string;
 }> = [
-  { src: "/photos/photo1.jpg", rotate: "-8deg", top: "2%", left: "-6%" },
-  { src: "/photos/photo2.png", rotate: "9deg", top: "1%", right: "-4%" },
+  { src: "/photos/photo1.jpg", rotate: "-8deg", top: "2%", left: "-8%" },
+  { src: "/photos/photo2.png", rotate: "9deg", top: "1%", right: "-9%" },
   { src: "/photos/photo3.jpg", rotate: "-5deg", top: "35%", left: "-8%" },
-  { src: "/photos/photo4.png", rotate: "7deg", top: "37%", right: "-6%" },
+  { src: "/photos/photo4.png", rotate: "5deg", top: "33%", right: "-8%" },
+  { src: "/photos/photo1.jpg", rotate: "8deg", bottom: "5%", left: "-7%" },
+  { src: "/photos/photo2.png", rotate: "-8deg", bottom: "6%", right: "-6%" },
 ];
 
 function isStandaloneMode() {
@@ -108,7 +110,8 @@ export default function Welcome() {
             bottom: p.bottom,
             left: p.left,
             right: p.right,
-            transform: `rotate(${p.rotate})`,
+            ["--base-rotate" as string]: p.rotate,
+            ["--float-delay" as string]: `${i * -2.8}s`,
           }}
         >
           <div className={styles.polaroid}>
@@ -142,8 +145,6 @@ export default function Welcome() {
 
         <p className={styles.landingText}>{t("welcome.landingText")}</p>
 
-        <p className={styles.landingSubText}>{t("welcome.landingSubText")}</p>
-
         <p className={styles.dateText}>{t("welcome.dateText")}</p>
 
         <button
@@ -151,7 +152,8 @@ export default function Welcome() {
           onClick={openLaunchSheet}
           className={styles.enterBtn}
         >
-          {t("welcome.enterApp")}
+          <span className={styles.shine} aria-hidden="true" />
+          <span>{t("welcome.enterApp")}</span>
         </button>
       </div>
 
