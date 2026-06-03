@@ -17,10 +17,11 @@
     "title": "Infos de l’événement",
     "instructionsTitle": "Comment utiliser l’appli",
     "instructionsBodyOne": "Seulement 20 photos sont autorisées par invité.",
-    "instructionsBodyTwo": "Vous pouvez aussi ajouter une petite note à chaque photo avant de la partager avec tout le monde.",
+    "instructionsBodyTwo": "Vous pouvez aussi ajouter une petite note ? chaque photo avant de la partager avec tout le monde.",
     "uploadTitle": "Fenêtre d’envoi",
     "uploadBody": "Vous aurez une fenêtre de 24 heures pour envoyer vos photos, afin de partager vos plus beaux moments sans vous presser.",
-    "noteBody": "Si quelque chose vous semble étrange, actualisez l’appli ou rouvrez-la depuis votre écran d’accueil."
+    "noteBody": "Si quelque chose vous semble étrange, actualisez l’appli ou rouvrez-la depuis votre écran d’accueil.",
+    "instructionsBodyThree": "Pour t?l?charger une photo, appuyez longuement sur l?image ou touchez le bouton de t?l?chargement."
   },
   "welcome": {
     "eyebrow": "Bienvenue à la célébration",

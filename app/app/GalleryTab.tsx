@@ -132,22 +132,38 @@ export default function GalleryTab() {
     setSelected(photo);
   }
 
-  function getDownloadName() {
-    return `${selected?.name || "photo"}.jpg`;
+  async function getSelectedPhotoBlob() {
+    if (!selected?.src) return;
+
+    const response = await fetch(selected.src);
+    if (!response.ok) {
+      throw new Error("Failed to load image");
+    }
+
+    return response.blob();
   }
 
-  async function handleSaveSelectedPhoto() {
+  async function handleDownloadSelectedPhoto() {
     if (!selected?.src) return;
 
     try {
-      const response = await fetch(selected.src);
-      if (!response.ok) {
-        throw new Error("Failed to load image");
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: selected.name || "Photo",
+            text: selected.note || selected.name || "Photo",
+            url: selected.src,
+          });
+          return;
+        } catch {
+          // Fall through to download below.
+        }
       }
 
-      const blob = await response.blob();
+      const blob = await getSelectedPhotoBlob();
+      if (!blob) return;
 
-      const file = new File([blob], getDownloadName(), {
+      const file = new File([blob], `${selected.name || "photo"}.jpg`, {
         type: blob.type || "image/jpeg",
       });
 
@@ -161,14 +177,13 @@ export default function GalleryTab() {
 
       const objectUrl = URL.createObjectURL(blob);
       const link = document.createElement("a");
-
       link.href = objectUrl;
-      link.download = getDownloadName();
+      link.download = `${selected.name || "photo"}.jpg`;
       link.rel = "noopener";
       document.body.appendChild(link);
       link.click();
       link.remove();
-      URL.revokeObjectURL(objectUrl);
+      window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
     } catch {
       window.open(selected.src, "_blank", "noopener,noreferrer");
     }
@@ -292,8 +307,8 @@ export default function GalleryTab() {
             <button
               type="button"
               className={styles.fsSaveOverlay}
-              onClick={handleSaveSelectedPhoto}
-              aria-label="Save photo"
+              onClick={() => void handleDownloadSelectedPhoto()}
+              aria-label="Download photo"
             >
               <Image
                 src="/download-icon.svg"

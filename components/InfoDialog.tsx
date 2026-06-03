@@ -74,6 +74,9 @@ export default function InfoDialog() {
                 <p className="mt-2 text-base leading-6 text-[#4a3929]">
                   {t("info.instructionsBodyTwo")}
                 </p>
+                <p className="mt-2 text-base leading-6 text-[#4a3929]">
+                  {t("info.instructionsBodyThree")}
+                </p>
               </section>
 
               <section className="rounded-2xl bg-white/70 p-4">
