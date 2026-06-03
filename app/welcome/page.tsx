@@ -22,13 +22,13 @@ const polaroids: Array<{
   left?: string;
   right?: string;
 }> = [
-  { src: "/photos/photo1.jpg", rotate: "-8deg", top: "2%", left: "-8%" },
-  { src: "/photos/photo2.png", rotate: "9deg", top: "1%", right: "-9%" },
-  { src: "/photos/photo3.jpg", rotate: "-5deg", top: "35%", left: "-8%" },
-  { src: "/photos/photo4.png", rotate: "5deg", top: "33%", right: "-8%" },
-  { src: "/photos/photo1.jpg", rotate: "8deg", bottom: "5%", left: "-7%" },
-  { src: "/photos/photo2.png", rotate: "-8deg", bottom: "6%", right: "-6%" },
-];
+    { src: "/photos/photo1.jpg", rotate: "-8deg", top: "2%", left: "-8%" },
+    { src: "/photos/photo2.png", rotate: "9deg", top: "1%", right: "-9%" },
+    { src: "/photos/photo3.jpg", rotate: "-5deg", top: "35%", left: "-8%" },
+    { src: "/photos/photo4.png", rotate: "5deg", top: "33%", right: "-8%" },
+    { src: "/photos/photo1.jpg", rotate: "8deg", bottom: "5%", left: "-7%" },
+    { src: "/photos/photo2.png", rotate: "-8deg", bottom: "6%", right: "-6%" },
+  ];
 
 function isStandaloneMode() {
   if (typeof window === "undefined") {
@@ -44,7 +44,7 @@ function isStandaloneMode() {
 
 function useHasHydrated() {
   return useSyncExternalStore(
-    () => () => {},
+    () => () => { },
     () => true,
     () => false,
   );
@@ -179,8 +179,8 @@ export default function Welcome() {
                   className={styles.greetingPolaroidWrap}
                   style={{ transform: `rotate(${p.rotate})` }}
                 >
-                  <div className={styles.polaroid}>
-                    <div className={styles.polaroidImg}>
+                  {/* <div className={styles.greetingPolaroid}>
+                    <div className={styles.greetingPolaroidImg}>
                       <Image
                         src={p.src}
                         alt={t("welcome.photoAlt")}
@@ -189,7 +189,7 @@ export default function Welcome() {
                         sizes="110px"
                       />
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               ))}
             </div>
@@ -198,6 +198,12 @@ export default function Welcome() {
               <p className={styles.greetingEyebrow}>{t("welcome.greetingEyebrow")}</p>
               <p className={styles.greetingText}>{t("welcome.greetingText")}</p>
               <p className={styles.greetingSubText}>{t("welcome.greetingSubText")}</p>
+
+              <div className={styles.divider}>
+                <div className={styles.divLine} />
+                <div className={styles.divDiamond} />
+                <div className={styles.divLine} />
+              </div>
 
               <div className={styles.greetingNotes}>
                 <p className={styles.greetingNote}>{t("welcome.noteOne")}</p>

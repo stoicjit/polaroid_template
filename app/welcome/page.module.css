@@ -102,6 +102,22 @@
   width: 150px;
 }
 
+.greetingPolaroid {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 10px;
+  padding-bottom: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.14);
+}
+
+.greetingPolaroidImg {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #f5efe6;
+}
+
 .greetingCopy {
   display: grid;
   gap: 12px;
@@ -117,7 +133,7 @@
 
 .greetingNote {
   font-family: var(--font-cormorant);
-  font-size: clamp(1.15rem, 1.8vw, 1.7rem);
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
   line-height: 1.15;
   color: #4b3827;
 }
@@ -363,7 +379,7 @@
 }
 
 .greetingText {
-  font-family: var(--font-imperial-script);
+  font-family: var(--font-parisienne);
   font-size: clamp(2rem, 4vw, 3.1rem);
   line-height: 1.05;
   color: #4f651d;
