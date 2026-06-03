@@ -31,6 +31,7 @@ export default function InstallGate({ onContinue }: InstallGateProps) {
   const [canPromptInstall, setCanPromptInstall] = useState(false);
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
+  const [showShareHint, setShowShareHint] = useState(false);
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (event: Event) => {
@@ -51,6 +52,81 @@ export default function InstallGate({ onContinue }: InstallGateProps) {
 
   const isIos = hydrated && isIosDevice();
 
+  function renderIosStepIcon(stepIndex: number) {
+    if (stepIndex === 0) {
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          className="h-5 w-5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M12 16V4" />
+          <path d="M8.5 7.5 12 4l3.5 3.5" />
+          <path d="M6 12v5.5A2.5 2.5 0 0 0 8.5 20h7A2.5 2.5 0 0 0 18 17.5V12" />
+        </svg>
+      );
+    }
+
+    if (stepIndex === 1) {
+      return (
+        <svg
+  viewBox="0 0 24 24"
+  aria-hidden="true"
+  className="h-5 w-5"
+  fill="none"
+  stroke="currentColor"
+  strokeWidth="1.8"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+>
+  <rect x="3" y="3" width="18" height="18" rx="4" />
+  <path d="M12 8v8" />
+  <path d="M8 12h8" />
+</svg>
+      );
+    }
+
+    return (
+      <svg
+  viewBox="0 0 24 24"
+  aria-hidden="true"
+  className="h-5 w-5"
+  fill="none"
+  stroke="currentColor"
+  strokeWidth="1.8"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+>
+  {/* phone body */}
+  <rect x="3" y="1" width="18" height="22" rx="4" />
+  {/* screen inset */}
+  <rect x="4.5" y="2.5" width="15" height="19" rx="2.5" strokeWidth="0.6" fillOpacity="0.06" fill="currentColor" />
+  {/* dynamic island */}
+  <rect x="9.5" y="4" width="5" height="1.8" rx="0.9" fill="currentColor" stroke="none" />
+  {/* row 1 */}
+  <rect x="6"    y="7.5" width="2.5" height="2.5" rx="0.5" fill="currentColor" stroke="none" />
+  <rect x="10.8" y="7.5" width="2.5" height="2.5" rx="0.5" fill="currentColor" stroke="none" />
+  <rect x="15.5" y="7.5" width="2.5" height="2.5" rx="0.5" fill="currentColor" stroke="none" />
+  {/* row 2 */}
+  <rect x="6"    y="11" width="2.5" height="2.5" rx="0.5" fill="currentColor" stroke="none" />
+  <rect x="10.8" y="11" width="2.5" height="2.5" rx="0.5" fill="currentColor" stroke="none" />
+  <rect x="15.5" y="11" width="2.5" height="2.5" rx="0.5" fill="currentColor" stroke="none" />
+  {/* row 3 */}
+  <rect x="6"    y="14.5" width="2.5" height="2.5" rx="0.5" fill="currentColor" stroke="none" />
+  <rect x="10.8" y="14.5" width="2.5" height="2.5" rx="0.5" fill="currentColor" stroke="none" />
+  {/* last icon outlined = newly added app */}
+  <rect x="15.5" y="14.5" width="2.5" height="2.5" rx="0.5" strokeWidth="1.5" />
+  {/* home indicator */}
+  <line x1="10" y1="20.5" x2="14" y2="20.5" strokeWidth="2" />
+</svg>
+    );
+  }
+
   const iosSteps = useMemo(
     () => [
       t("welcome.iosStepOne"),
@@ -59,6 +135,22 @@ export default function InstallGate({ onContinue }: InstallGateProps) {
     ],
     [t],
   );
+
+  async function handleOpenShareSheet() {
+    if (typeof navigator === "undefined" || !navigator.share) {
+      setShowShareHint(true);
+      return;
+    }
+
+    try {
+      await navigator.share({
+        title: document.title,
+        url: window.location.href,
+      });
+    } catch {
+      setShowShareHint(true);
+    }
+  }
 
   async function handleInstall() {
     if (!deferredPrompt) {
@@ -97,37 +189,35 @@ export default function InstallGate({ onContinue }: InstallGateProps) {
         <p className="mt-2 text-sm text-[#3b2b1c]">
           {t("welcome.iosInstallHint")}
         </p>
-        <div className="mt-4 flex items-center justify-center gap-3 rounded-3xl bg-[#faf7f2] px-4 py-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#cabaa6] bg-white text-[#1e140a]">
-            <svg
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M12 16V4" />
-              <path d="M8.5 7.5 12 4l3.5 3.5" />
-              <path d="M6 12v5.5A2.5 2.5 0 0 0 8.5 20h7A2.5 2.5 0 0 0 18 17.5V12" />
-            </svg>
-          </div>
-          <div className="text-left">
-            <p className="text-[10px] uppercase tracking-[0.35em] text-[#7b5d3c]">
-              {t("welcome.iosShareLabel")}
-            </p>
-            <p className="text-sm text-[#4b3827]">Safari</p>
-          </div>
-        </div>
         <ol className="mt-4 grid gap-2 text-sm text-[#4b3827]">
-          {iosSteps.map((step) => (
-            <li key={step} className="rounded-2xl bg-[#faf7f2] px-3 py-2">
-              {step}
+          {iosSteps.map((step, stepIndex) => (
+            <li
+              key={step}
+              className="grid grid-cols-[1fr_auto] items-center gap-3 rounded-2xl bg-[#faf7f2] px-4 py-3"
+            >
+              <span className="text-center leading-6">{step}</span>
+              {stepIndex === 0 ? (
+                <button
+                  type="button"
+                  onClick={handleOpenShareSheet}
+                  aria-label={step}
+                  className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-[#cabaa6] bg-white text-[#1e140a] transition-transform hover:scale-105 active:scale-95"
+                >
+                  {renderIosStepIcon(stepIndex)}
+                </button>
+              ) : (
+                <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-[#cabaa6] bg-white text-[#1e140a]">
+                  {renderIosStepIcon(stepIndex)}
+                </span>
+              )}
             </li>
           ))}
         </ol>
+        {showShareHint ? (
+          <p className="mt-3 rounded-2xl bg-[#faf7f2] px-3 py-2 text-sm text-[#4b3827]">
+            Tap the Safari share button in the browser toolbar if the icon does not open anything.
+          </p>
+        ) : null}
       </div>
     );
   }
