@@ -1,15 +1,22 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
   collection,
-  onSnapshot,
+  endAt,
+  getDocs,
+  limit,
   orderBy,
   query as firestoreQuery,
+  startAfter,
+  startAt,
+  type DocumentData,
   type Timestamp,
+  type QueryDocumentSnapshot,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { useI18n } from "@/components/I18nProvider";
 import styles from "./gallery.module.css";
 
 export type Photo = {
@@ -22,7 +29,14 @@ export type Photo = {
   ownerUid: string;
 };
 
+type SortOrder = "desc" | "asc";
+
 const ROTATIONS = ["-1.5deg", "1.2deg", "-2deg", "1.8deg", "-1deg", "2.2deg"];
+const PAGE_SIZE = 24;
+const SORT_OPTIONS: Array<{ label: string; value: SortOrder }> = [
+  { label: "Newest to oldest", value: "desc" },
+  { label: "Oldest to newest", value: "asc" },
+];
 
 function resolvePhotoUrl(data: Record<string, unknown>) {
   const candidates = [
@@ -63,70 +77,237 @@ function resolvePhotoTime(data: Record<string, unknown>) {
   return "";
 }
 
+function toPhoto(
+  docSnapshot: QueryDocumentSnapshot<DocumentData>,
+): Photo | null {
+  const data = docSnapshot.data() as Record<string, unknown>;
+  const src = resolvePhotoUrl(data);
+
+  if (!src) {
+    return null;
+  }
+
+  return {
+    id: docSnapshot.id,
+    src,
+    name:
+      typeof data.name === "string" && data.name.trim() ? data.name : "Guest",
+    note:
+      typeof data.note === "string" && data.note.trim() ? data.note : "",
+    time: resolvePhotoTime(data),
+    createdAt: typeof data.createdAt === "number" ? data.createdAt : undefined,
+    ownerUid:
+      typeof data.ownerUid === "string" && data.ownerUid.trim()
+        ? data.ownerUid
+        : "",
+  } satisfies Photo;
+}
+
 export default function GalleryTab() {
+  const { t } = useI18n();
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<Photo | null>(null);
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [lastVisible, setLastVisible] =
+    useState<QueryDocumentSnapshot<DocumentData> | null>(null);
+  const [searchResults, setSearchResults] = useState<Photo[]>([]);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
+  const [sortMenuOpen, setSortMenuOpen] = useState(false);
+  const sortMenuRef = useRef<HTMLDivElement | null>(null);
+  const galleryScrollRef = useRef<HTMLDivElement | null>(null);
+  const loadMoreTriggerRef = useRef<HTMLDivElement | null>(null);
+  const searchTerm = query.trim().toLowerCase();
+
+  const sortLabel =
+    t(
+      sortOrder === "desc"
+        ? "gallery.newestToOldest"
+        : "gallery.oldestToNewest",
+    ) ??
+    t("gallery.newestToOldest");
 
   useEffect(() => {
-    const photosQuery = firestoreQuery(
-      collection(db, "photos"),
-      orderBy("createdAt", "desc"),
-    );
+    const handlePointerDown = (event: MouseEvent | TouchEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (sortMenuRef.current && !sortMenuRef.current.contains(target)) {
+        setSortMenuOpen(false);
+      }
+    };
 
-    const unsubscribe = onSnapshot(
-      photosQuery,
-      (snapshot) => {
-        const nextPhotos = snapshot.docs
-          .map((docSnapshot) => {
-            const data = docSnapshot.data() as Record<string, unknown>;
-            const src = resolvePhotoUrl(data);
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("touchstart", handlePointerDown);
 
-            if (!src) {
-              return null;
-            }
-
-            return {
-              id: docSnapshot.id,
-              src,
-              name:
-                typeof data.name === "string" && data.name.trim()
-                  ? data.name
-                  : "Guest",
-              note:
-                typeof data.note === "string" && data.note.trim()
-                  ? data.note
-                  : "",
-              time: resolvePhotoTime(data),
-              createdAt:
-                typeof data.createdAt === "number" ? data.createdAt : undefined,
-              ownerUid:
-                typeof data.ownerUid === "string" && data.ownerUid.trim()
-                  ? data.ownerUid
-                  : "",
-            } satisfies Photo;
-          })
-          .filter((photo): photo is Photo => photo !== null);
-
-        setPhotos(nextPhotos);
-        setLoading(false);
-      },
-      () => {
-        setPhotos([]);
-        setLoading(false);
-      },
-    );
-
-    return () => unsubscribe();
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("touchstart", handlePointerDown);
+    };
   }, []);
 
-  const filtered = useMemo(() => {
-    if (!query.trim()) return photos;
-    return photos.filter((photo) =>
-      photo.name.toLowerCase().includes(query.toLowerCase()),
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadInitialPhotos() {
+      setLoading(true);
+      setLoadingMore(false);
+      setHasMore(true);
+      setLastVisible(null);
+      setSelected(null);
+
+      try {
+        const photosQuery = firestoreQuery(
+          collection(db, "photos"),
+          orderBy("createdAt", sortOrder),
+          limit(PAGE_SIZE),
+        );
+
+        const snapshot = await getDocs(photosQuery);
+        const nextPhotos = snapshot.docs
+          .map(toPhoto)
+          .filter((photo): photo is Photo => photo !== null);
+
+        if (cancelled) return;
+
+        setPhotos(nextPhotos);
+        setLastVisible(snapshot.docs[snapshot.docs.length - 1] ?? null);
+        setHasMore(snapshot.docs.length === PAGE_SIZE);
+      } catch {
+        if (!cancelled) {
+          setPhotos([]);
+          setHasMore(false);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    }
+
+    void loadInitialPhotos();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [sortOrder]);
+
+  const loadMorePhotos = useCallback(async () => {
+    if (loading || loadingMore || !hasMore || !lastVisible) return;
+
+    setLoadingMore(true);
+
+    try {
+      const photosQuery = firestoreQuery(
+        collection(db, "photos"),
+        orderBy("createdAt", sortOrder),
+        startAfter(lastVisible),
+        limit(PAGE_SIZE),
+      );
+
+      const snapshot = await getDocs(photosQuery);
+      const nextPhotos = snapshot.docs
+        .map(toPhoto)
+        .filter((photo): photo is Photo => photo !== null);
+
+      setPhotos((currentPhotos) => {
+        const existingIds = new Set(currentPhotos.map((photo) => photo.id));
+        return [
+          ...currentPhotos,
+          ...nextPhotos.filter((photo) => !existingIds.has(photo.id)),
+        ];
+      });
+      setLastVisible(snapshot.docs[snapshot.docs.length - 1] ?? null);
+      setHasMore(snapshot.docs.length === PAGE_SIZE);
+    } catch {
+      setHasMore(false);
+    } finally {
+      setLoadingMore(false);
+    }
+  }, [hasMore, lastVisible, loading, loadingMore, sortOrder]);
+
+  useEffect(() => {
+    if (searchTerm || !hasMore) {
+      return undefined;
+    }
+
+    const root = galleryScrollRef.current;
+    const trigger = loadMoreTriggerRef.current;
+
+    if (!root || !trigger) {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          void loadMorePhotos();
+        }
+      },
+      {
+        root,
+        rootMargin: "250px 0px",
+        threshold: 0,
+      },
     );
-  }, [photos, query]);
+
+    observer.observe(trigger);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [hasMore, loadMorePhotos, searchTerm]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadSearchResults() {
+      if (!searchTerm) {
+        setSearchResults([]);
+        setSearchLoading(false);
+        return;
+      }
+
+      setSearchLoading(true);
+
+      try {
+        const searchQuery = firestoreQuery(
+          collection(db, "photos"),
+          orderBy("nameLower"),
+          startAt(searchTerm),
+          endAt(`${searchTerm}\uf8ff`),
+        );
+
+        const snapshot = await getDocs(searchQuery);
+        const nextResults = snapshot.docs
+          .map(toPhoto)
+          .filter((photo): photo is Photo => photo !== null);
+
+        if (!cancelled) {
+          setSearchResults(nextResults);
+        }
+      } catch {
+        if (!cancelled) {
+          setSearchResults([]);
+        }
+      } finally {
+        if (!cancelled) {
+          setSearchLoading(false);
+        }
+      }
+    }
+
+    void loadSearchResults();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [searchTerm]);
+
+  const filtered = searchTerm ? searchResults : photos;
+  const isLoading = searchTerm ? searchLoading : loading;
 
   function openPhoto(photo: Photo) {
     setSelected(photo);
@@ -150,7 +331,7 @@ export default function GalleryTab() {
           <input
             type="text"
             className={styles.searchInput}
-            placeholder="Search by name…"
+            placeholder="Search by name..."
             value={query}
             onChange={(event) => setQuery(event.target.value)}
           />
@@ -165,10 +346,49 @@ export default function GalleryTab() {
             </button>
           ) : null}
         </div>
+
+        <div className={styles.sortRow} ref={sortMenuRef}>
+          <button
+            type="button"
+            className={styles.sortButton}
+            onClick={() => setSortMenuOpen((current) => !current)}
+            aria-haspopup="menu"
+            aria-expanded={sortMenuOpen}
+          >
+            <span>{t("gallery.sortBy")}</span>
+            <span className={styles.sortButtonValue}>{sortLabel}</span>
+            <i className="ti ti-chevron-down" aria-hidden="true" />
+          </button>
+
+          {sortMenuOpen ? (
+            <div className={styles.sortDropdown} role="menu" aria-label="Sort photos">
+              {SORT_OPTIONS.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  className={`${styles.sortOption} ${
+                    sortOrder === option.value ? styles.sortOptionActive : ""
+                  }`}
+                  onClick={() => {
+                    setSortOrder(option.value);
+                    setSortMenuOpen(false);
+                  }}
+                  role="menuitem"
+                >
+                  {t(
+                    option.value === "desc"
+                      ? "gallery.newestToOldest"
+                      : "gallery.oldestToNewest",
+                  )}
+                </button>
+              ))}
+            </div>
+          ) : null}
+        </div>
       </div>
 
-      <div className={styles.galleryScroll}>
-        {loading ? (
+      <div className={styles.galleryScroll} ref={galleryScrollRef}>
+        {isLoading ? (
           <div className={styles.emptyState}>
             <p>Loading photos...</p>
           </div>
@@ -182,44 +402,61 @@ export default function GalleryTab() {
             <p>No uploaded photos yet</p>
           </div>
         ) : (
-          <div className={styles.galleryGrid}>
-            {filtered.map((photo, index) => (
-              <div
-                key={photo.id}
-                className={styles.polaroid}
-                style={{ transform: `rotate(${ROTATIONS[index % ROTATIONS.length]})` }}
-                onClick={() => openPhoto(photo)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(event) => event.key === "Enter" && openPhoto(photo)}
-                aria-label={`Photo by ${photo.name}`}
-              >
-                <div className={styles.polaroidImg}>
-                  {photo.src ? (
-                    <Image
-                      src={photo.src}
-                      alt={`Photo by ${photo.name}`}
-                      fill
-                      className={styles.polaroidImgFill}
-                      sizes="140px"
-                      unoptimized
-                    />
-                  ) : (
-                    <div className={styles.polaroidPlaceholder}>
-                      <i className="ti ti-photo" aria-hidden="true" />
-                    </div>
-                  )}
-                </div>
-                <p
-                  className={`${styles.polaroidNote} ${
-                    photo.note ? "" : styles.polaroidNoteEmpty
-                  }`}
+          <>
+            <div className={styles.galleryGrid}>
+              {filtered.map((photo, index) => (
+                <div
+                  key={photo.id}
+                  className={styles.polaroid}
+                  style={{ transform: `rotate(${ROTATIONS[index % ROTATIONS.length]})` }}
+                  onClick={() => openPhoto(photo)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(event) => event.key === "Enter" && openPhoto(photo)}
+                  aria-label={`Photo by ${photo.name}`}
                 >
-                  {photo.note || "\u00A0"}
-                </p>
+                  <div className={styles.polaroidImg}>
+                    {photo.src ? (
+                      <Image
+                        src={photo.src}
+                        alt={`Photo by ${photo.name}`}
+                        fill
+                        className={styles.polaroidImgFill}
+                        sizes="140px"
+                        unoptimized
+                      />
+                    ) : (
+                      <div className={styles.polaroidPlaceholder}>
+                        <i className="ti ti-photo" aria-hidden="true" />
+                      </div>
+                    )}
+                  </div>
+                  <p
+                    className={`${styles.polaroidNote} ${
+                      photo.note ? "" : styles.polaroidNoteEmpty
+                    }`}
+                  >
+                    {photo.note || "\u00A0"}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {!searchTerm && hasMore ? (
+              <div className={styles.loadMoreWrap}>
+                {loadingMore ? (
+                  <div className={styles.loadMoreStatus}>
+                    {t("gallery.loadingMore")}
+                  </div>
+                ) : null}
+                <div
+                  ref={loadMoreTriggerRef}
+                  className={styles.loadMoreTrigger}
+                  aria-hidden="true"
+                />
               </div>
-            ))}
-          </div>
+            ) : null}
+          </>
         )}
       </div>
 
@@ -257,7 +494,7 @@ export default function GalleryTab() {
               type="button"
               className={styles.fsSaveOverlay}
               onClick={() => void handleCopySelectedPhoto()}
-              aria-label="Copy photo link"
+              aria-label="Open photo"
             >
               <Image
                 src="/download-icon.svg"

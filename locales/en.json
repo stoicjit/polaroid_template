@@ -19,7 +19,7 @@
     "instructionsBodyOne": "Only 20 photos are allowed per guest.",
     "instructionsBodyTwo": "You can also add a little note to each photo before sharing it with everyone.",
     "uploadTitle": "Upload window",
-    "uploadBody": "You’ll have a 24-hour window to upload pictures, so there’s plenty of time to share your favorite moments.",
+    "uploadBody": "You'll have a 24-hour window to upload pictures, so there's plenty of time to share your favorite moments.",
     "instructionsBodyThree": "To download a photo, press and hold the picture or tap the download button."
   },
   "welcome": {
@@ -68,5 +68,13 @@
   },
   "upload": {
     "upload": "Upload"
+  },
+  "gallery": {
+    "sortBy": "Sort by",
+    "newestToOldest": "Newest to oldest",
+    "oldestToNewest": "Oldest to newest",
+    "loadMore": "Load more",
+    "loadingMore": "Loading...",
+    "noMore": "No more photos"
   }
 }

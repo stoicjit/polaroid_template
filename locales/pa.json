@@ -69,5 +69,13 @@
   },
   "upload": {
     "upload": "Upload"
+  },
+  "gallery": {
+    "sortBy": "Sort by",
+    "newestToOldest": "Navi ton purani",
+    "oldestToNewest": "Purani ton navi",
+    "loadMore": "Hor dikhau",
+    "loadingMore": "Loading...",
+    "noMore": "Hor photos nahin"
   }
 }

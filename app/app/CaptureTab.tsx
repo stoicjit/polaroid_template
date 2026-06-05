@@ -277,13 +277,14 @@ export default function CaptureTab() {
       await uploadBytes(storageRef, selectedFile);
       const url = await getDownloadURL(storageRef);
 
-      await addDoc(collection(db, "photos"), {
-        ownerUid: currentUid,
-        name: guestName.trim() || "Guest",
-        url,
-        note: trimmedNote,
-        createdAt: serverTimestamp(),
-      });
+  await addDoc(collection(db, "photos"), {
+    ownerUid: currentUid,
+    name: guestName.trim() || "Guest",
+    nameLower: (guestName.trim() || "Guest").toLowerCase(),
+    url,
+    note: trimmedNote,
+    createdAt: serverTimestamp(),
+  });
 
       resetDraft();
     } catch (error) {
