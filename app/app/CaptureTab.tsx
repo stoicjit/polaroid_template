@@ -21,6 +21,7 @@ import {
   isPhotoNoteValid,
 } from "@/lib/photos";
 import { useAnonymousAuth } from "@/lib/useAnonymousAuth";
+import { useI18n } from "@/components/I18nProvider";
 import styles from "./gallery.module.css";
 
 type FacingMode = "environment" | "user";
@@ -29,6 +30,13 @@ async function canvasToBlob(canvas: HTMLCanvasElement) {
   return new Promise<Blob | null>((resolve) => {
     canvas.toBlob((blob) => resolve(blob), "image/jpeg", 0.95);
   });
+}
+
+function formatText(template: string, replacements: Record<string, string>) {
+  return Object.entries(replacements).reduce(
+    (currentText, [key, replacement]) => currentText.replaceAll(`{${key}}`, replacement),
+    template,
+  );
 }
 
 export default function CaptureTab() {
@@ -46,6 +54,7 @@ export default function CaptureTab() {
   const [photoCount, setPhotoCount] = useState(0);
   const guestName = useGuestName();
   const { currentUid, authReady } = useAnonymousAuth();
+  const { t } = useI18n();
 
   useEffect(() => {
     let cancelled = false;
@@ -72,16 +81,12 @@ export default function CaptureTab() {
       }
 
       if (!window.isSecureContext) {
-        setCameraError(
-          "Camera access needs HTTPS or localhost. On a phone, open the deployed site or an HTTPS tunnel.",
-        );
+        setCameraError(t("capture.cameraAccessHttps"));
         return;
       }
 
       if (!navigator.mediaDevices?.getUserMedia) {
-        setCameraError(
-          "This browser does not support live camera access in this context.",
-        );
+        setCameraError(t("capture.cameraAccessUnsupported"));
         return;
       }
 
@@ -114,10 +119,10 @@ export default function CaptureTab() {
 
         setCameraError(
           error instanceof Error && error.name === "NotAllowedError"
-            ? "Camera access is needed to take photos."
+            ? t("capture.cameraAccessNeeded")
             : error instanceof Error && error.name === "NotFoundError"
-              ? "No camera was found on this device."
-            : "We could not open the camera.",
+              ? t("capture.noCameraFound")
+            : t("capture.cameraOpenFailed"),
         );
       }
     }
@@ -128,7 +133,7 @@ export default function CaptureTab() {
       cancelled = true;
       stopCameraStream();
     };
-  }, [facingMode, selectedFile]);
+  }, [facingMode, selectedFile, t]);
 
   useEffect(() => {
     if (!authReady || !currentUid) return undefined;
@@ -179,7 +184,7 @@ export default function CaptureTab() {
     if (!file) return;
 
     if (!authReady || !currentUid) {
-      setSendError("Please wait a moment and try again.");
+      setSendError(t("capture.pleaseWait"));
       return;
     }
 
@@ -199,7 +204,7 @@ export default function CaptureTab() {
     const height = video.videoHeight;
 
     if (!width || !height) {
-      setCameraError("The camera is still getting ready.");
+      setCameraError(t("capture.cameraStillGettingReady"));
       return;
     }
 
@@ -208,7 +213,7 @@ export default function CaptureTab() {
 
     const context = canvas.getContext("2d");
     if (!context) {
-      setCameraError("We could not capture this photo.");
+      setCameraError(t("capture.captureFailed"));
       return;
     }
 
@@ -216,7 +221,7 @@ export default function CaptureTab() {
     const blob = await canvasToBlob(canvas);
 
     if (!blob) {
-      setCameraError("We could not capture this photo.");
+      setCameraError(t("capture.captureFailed"));
       return;
     }
 
@@ -251,7 +256,9 @@ export default function CaptureTab() {
 
     const trimmedNote = note.trim();
     if (!isPhotoNoteValid(trimmedNote)) {
-      setSendError(`Add a note up to ${MAX_NOTE_LENGTH} characters.`);
+      setSendError(
+        formatText(t("capture.noteTooLong"), { max: String(MAX_NOTE_LENGTH) }),
+      );
       return;
     }
 
@@ -266,7 +273,11 @@ export default function CaptureTab() {
       const existingPhotosSnapshot = await getDocs(existingPhotosQuery);
 
       if (existingPhotosSnapshot.size >= MAX_PHOTO_UPLOADS) {
-        setSendError(`Only ${MAX_PHOTO_UPLOADS} photos are allowed per guest.`);
+        setSendError(
+          formatText(t("capture.photoLimitReached"), {
+            max: String(MAX_PHOTO_UPLOADS),
+          }),
+        );
         return;
       }
 
@@ -287,10 +298,8 @@ export default function CaptureTab() {
   });
 
       resetDraft();
-    } catch (error) {
-      setSendError(
-        error instanceof Error ? error.message : "Upload failed. Please try again.",
-      );
+    } catch {
+      setSendError(t("capture.uploadFailed"));
     } finally {
       setUploading(false);
     }
@@ -317,7 +326,7 @@ export default function CaptureTab() {
               ) : cameraReady ? (
                 <div className={styles.cameraCount}>{remainingCountLabel}</div>
               ) : (
-                <div className={styles.cameraMessage}>Opening camera...</div>
+                <div className={styles.cameraMessage}>{t("capture.cameraOpening")}</div>
               )}
             </div>
           </div>
@@ -327,7 +336,7 @@ export default function CaptureTab() {
               type="button"
               className={styles.uploadThumb}
               onClick={handleUploadTrigger}
-              aria-label="Upload photo from phone"
+              aria-label={t("capture.uploadFromPhone")}
               disabled={uploading || !authReady || limitReached}
             >
               <i className="ti ti-photo-up" aria-hidden="true" />
@@ -337,7 +346,7 @@ export default function CaptureTab() {
               type="button"
               className={styles.shutterBtn}
               onClick={handleCapture}
-              aria-label="Take photo"
+              aria-label={t("capture.takePhoto")}
               disabled={uploading || !authReady || !cameraReady || limitReached}
             >
               <div className={styles.shutterInner} />
@@ -347,7 +356,7 @@ export default function CaptureTab() {
               type="button"
               className={styles.switchBtn}
               onClick={handleFlipCamera}
-              aria-label="Switch camera"
+              aria-label={t("capture.switchCamera")}
               disabled={uploading || !authReady || limitReached}
             >
               <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.switchIcon}>
@@ -365,7 +374,7 @@ export default function CaptureTab() {
             <div className={styles.capturePhoto}>
               <Image
                 src={previewUrl}
-                alt="Photo preview"
+                alt={t("capture.photoPreview")}
                 fill
                 className={styles.polaroidImgFill}
                 sizes="100vw"
@@ -373,7 +382,7 @@ export default function CaptureTab() {
               />
             </div>
             <div className={styles.captureCaption}>
-              <p className={styles.captureCaptionTitle}>Add a note</p>
+              <p className={styles.captureCaptionTitle}>{t("capture.addNote")}</p>
               <textarea
                 className={styles.captureNoteInput}
                 value={note}
@@ -381,7 +390,7 @@ export default function CaptureTab() {
                   setNote(event.target.value);
                   setSendError("");
                 }}
-                placeholder="Write a short note..."
+                placeholder={t("capture.notePlaceholder")}
                 rows={3}
                 maxLength={MAX_NOTE_LENGTH}
               />
@@ -401,7 +410,7 @@ export default function CaptureTab() {
               onClick={resetDraft}
               disabled={uploading}
             >
-              Retake
+              {t("capture.retake")}
             </button>
             <button
               type="button"
@@ -409,7 +418,7 @@ export default function CaptureTab() {
               onClick={handleSend}
               disabled={uploading || !isPhotoNoteValid(note) || limitReached}
             >
-              {uploading ? "Sending..." : "Send"}
+              {uploading ? t("capture.sending") : t("capture.send")}
             </button>
           </div>
         </div>

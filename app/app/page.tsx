@@ -4,11 +4,13 @@ import { useState } from "react";
 import CaptureTab from "./CaptureTab";
 import GalleryTab from "./GalleryTab";
 import styles from "./gallery.module.css";
+import { useI18n } from "@/components/I18nProvider";
 
 export type Tab = "capture" | "gallery";
 
 export default function GalleryPage() {
   const [activeTab, setActiveTab] = useState<Tab>("capture");
+  const { t } = useI18n();
 
   return (
     <main className={styles.root}>
@@ -30,7 +32,7 @@ export default function GalleryPage() {
           <span className={styles.tabIcon}>
             <i className="ti ti-camera" aria-hidden="true" />
           </span>
-          <span className={styles.tabLabel}>Capture</span>
+          <span className={styles.tabLabel}>{t("tabs.capture")}</span>
         </button>
         <button
           type="button"
@@ -40,7 +42,7 @@ export default function GalleryPage() {
           <span className={styles.tabIcon}>
             <i className="ti ti-layout-grid" aria-hidden="true" />
           </span>
-          <span className={styles.tabLabel}>Gallery</span>
+          <span className={styles.tabLabel}>{t("tabs.gallery")}</span>
         </button>
       </div>
     </main>

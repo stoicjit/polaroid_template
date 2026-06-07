@@ -13,11 +13,11 @@
     "closeLabel": "Close"
   },
   "info": {
-    "eyebrow": "Quick info",
-    "title": "Event info",
+    "eyebrow": "Info",
+    "title": "App info",
     "instructionsTitle": "How to use the app",
     "instructionsBodyOne": "Only 20 photos are allowed per guest.",
-    "instructionsBodyTwo": "You can also add a little note to each photo before sharing it with everyone.",
+    "instructionsBodyTwo": "Add a short note to each photo before sharing it with everyone.",
     "uploadTitle": "Upload window",
     "uploadBody": "You'll have a 24-hour window to upload pictures, so there's plenty of time to share your favorite moments.",
     "instructionsBodyThree": "To download a photo, press and hold the picture or tap the download button."
@@ -69,8 +69,44 @@
   "upload": {
     "upload": "Upload"
   },
+  "guest": "Guest",
+  "capture": {
+    "cameraAccessHttps": "Camera access needs HTTPS or localhost. On a phone, open the deployed site or an HTTPS tunnel.",
+    "cameraAccessUnsupported": "This browser does not support live camera access in this context.",
+    "cameraAccessNeeded": "Camera access is needed to take photos.",
+    "noCameraFound": "No camera was found on this device.",
+    "cameraOpenFailed": "We could not open the camera.",
+    "pleaseWait": "Please wait a moment and try again.",
+    "cameraStillGettingReady": "The camera is still getting ready.",
+    "captureFailed": "We could not capture this photo.",
+    "cameraOpening": "Opening camera...",
+    "uploadFromPhone": "Upload photo from phone",
+    "takePhoto": "Take photo",
+    "switchCamera": "Switch camera",
+    "photoPreview": "Photo preview",
+    "addNote": "Add a note",
+    "notePlaceholder": "Write a short note...",
+    "retake": "Retake",
+    "sending": "Sending...",
+    "send": "Send",
+    "noteTooLong": "Add a note up to {max} characters.",
+    "photoLimitReached": "Only {max} photos are allowed per guest.",
+    "uploadFailed": "Upload failed. Please try again."
+  },
+  "tabs": {
+    "capture": "Capture",
+    "gallery": "Gallery"
+  },
   "gallery": {
+    "searchPlaceholder": "Search by name...",
+    "clearSearch": "Clear search",
     "sortBy": "Sort by",
+    "sortPhotos": "Sort photos",
+    "loadingPhotos": "Loading photos...",
+    "noUploadedPhotosYet": "No uploaded photos yet",
+    "photoBy": "Photo by",
+    "goBack": "Go back",
+    "openPhoto": "Open photo",
     "newestToOldest": "Newest to oldest",
     "oldestToNewest": "Oldest to newest",
     "loadMore": "Load more",

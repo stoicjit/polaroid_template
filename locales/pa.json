@@ -1,81 +1,117 @@
 {
-  "meta": {
-    "title": "Idan ate Gurdeep da Viyah",
-    "description": "Jashan vich tuhada swaagat hai"
-  },
-  "common": {
-    "languageLabel": "Bhasha",
-    "english": "Angrezi",
-    "french": "French",
-    "punjabi": "Punjabi",
-    "hebrew": "Ibrani",
-    "infoLabel": "Jankari",
-    "closeLabel": "Band karo"
-  },
-  "info": {
-    "eyebrow": "Jaldi jankari",
-    "title": "Event info",
-    "instructionsTitle": "App kiven vartni",
-    "instructionsBodyOne": "Sirf 20 photos har guest layi allowed ne.",
-    "instructionsBodyTwo": "Har photo naal ik chhoti note vi chhad sakde ho, phir ohnu sanjhi gallery vich bhejo.",
-    "uploadTitle": "Upload window",
-    "uploadBody": "Tuhade kol photos upload karan layi 24 ghante da window hovega, taan jo tusi apne yaadgar lamhe araam naal sanjhe kar sako.",
-    "noteBody": "Je kujh theek na lagge, app refresh karo ya home screen ton dobara kholo.",
-    "instructionsBodyThree": "Photo download karan layi, tasveer nu lamma press karo ya download button te tap karo."
-  },
-  "welcome": {
-    "eyebrow": "jashan vich tuhadda swaagat hai",
-    "landingText": "Raat layi tuhadi app, moments nu capture te share karan lai, ik polaroid de naal ik polaroid.",
-    "landingSubText": "Polaroid lamhan di ik sanjhi gallery.",
-    "dateText": "September 2026",
-    "enter": "Andar jao",
-    "enterApp": "App kholo",
-    "installBadge": "Pehlaan install karo",
-    "installHint": "Wiah wali app nu home screen te rakho, taan experience smooth rahe.",
-    "installDescription": "Tuhada browser eh app ithe hi install kar sakda hai.",
-    "installCta": "App install karo",
-    "iosInstallHint": "iPhone te share sheet kholo te Add to Home Screen chuno.",
-    "iosShareLabel": "Safari Share",
-    "iosStepOne": "Safari vich Share button te tap karo.",
-    "iosStepTwo": "Add to Home Screen chuno.",
-    "iosStepThree": "Nave icon ton app kholo.",
-    "greetingEyebrow": "Swagat hai",
-    "greetingText": "Assi tuhanu dekh ke bahut khush haan.",
-    "greetingSubText": "Apna naam jodo taan jo tuhadiyan photos tuhade naal juriyan rehan poori shaam.",
-    "noteOne": "Har bande layi max 20 photos.",
-    "noteTwo": "Tusi har photo te note vi add kar sakde ho.",
-    "enterEvent": "Andar jao",
-    "photoAlt": "Idan te Gurdeep"
-  },
-  "instructions": {
-    "eyebrow": "Kujh chhotiyaan gallan pehlan",
-    "titleLead": "Jashan vich dakhil hon ton pehlan",
-    "titleAccent": "dyaan rakho",
-    "body": "Tusi shaam de douran 20 photos tak share kar sakde ho. Har yaad sab de layi nazar aundi hai, taan jo jashan sanjha te sohna rahe.",
-    "notes": "Hun photo lo ya thodi der baad wapas aa ke upload karo.",
-    "nameTitle": "Tuhada naam",
-    "nameLabel": "Tuhada naam",
-    "enterEvent": "Jashan vich dakhil ho"
-  },
-  "nameGate": {
-    "placeholder": "Tuhada naam",
-    "save": "Save karo"
-  },
-  "app": {
-    "loading": "Load ho reha hai...",
-    "placeholder": "Sanjhe yaadgar lamhe jald hi ithhe nazar aunge.",
-    "linkedTo": "Photos {name} naal link hon ge.",
-    "linkPrompt": "Apna naam welcome message vich jodo taan jo photos tuhade naal link ho jaan."
-  },
-  "upload": {
-    "upload": "Upload"
-  },
-  "gallery": {
-    "sortBy": "Sort by",
-    "newestToOldest": "Navi ton purani",
-    "oldestToNewest": "Purani ton navi",
-    "loadMore": "Hor dikhau",
-    "loadingMore": "Loading...",
-    "noMore": "Hor photos nahin"
-  }
+    "meta":  {
+                 "title":  "Idan ate Gurdeep da Viyah",
+                 "description":  "Jashan vich tuhada swaagat hai"
+             },
+    "common":  {
+                   "languageLabel":  "Bhasha",
+                   "english":  "Angrezi",
+                   "french":  "French",
+                   "punjabi":  "Punjabi",
+                   "hebrew":  "Ibrani",
+                   "infoLabel":  "Jankari",
+                   "closeLabel":  "Band karo"
+               },
+    "info":  {
+                 "eyebrow":  "Jankari",
+                 "title":  "App info",
+                 "instructionsTitle":  "App kiven vartni",
+                 "instructionsBodyOne":  "Sirf 20 photos har guest layi allowed ne.",
+                 "instructionsBodyTwo":  "Har photo naal ik chhoti note zaroor jodo, phir ohnu sanjhi gallery vich bhejo.",
+                 "uploadTitle":  "Upload window",
+                 "uploadBody":  "Tuhade kol photos upload karan layi 24 ghante da window hovega, taan jo tusi apne yaadgar lamhe araam naal sanjhe kar sako.",
+                 "noteBody":  "Je kujh theek na lagge, app refresh karo ya home screen ton dobara kholo.",
+                 "instructionsBodyThree":  "Photo download karan layi, tasveer nu lamma press karo ya download button te tap karo."
+             },
+    "welcome":  {
+                    "eyebrow":  "jashan vich tuhadda swaagat hai",
+                    "landingText":  "Raat layi tuhadi app, moments nu capture te share karan lai, ik polaroid de naal ik polaroid.",
+                    "landingSubText":  "Polaroid lamhan di ik sanjhi gallery.",
+                    "dateText":  "September 2026",
+                    "enter":  "Andar jao",
+                    "enterApp":  "App kholo",
+                    "installBadge":  "Pehlaan install karo",
+                    "installHint":  "Wiah wali app nu home screen te rakho, taan experience smooth rahe.",
+                    "installDescription":  "Tuhada browser eh app ithe hi install kar sakda hai.",
+                    "installCta":  "App install karo",
+                    "iosInstallHint":  "iPhone te share sheet kholo te Add to Home Screen chuno.",
+                    "iosShareLabel":  "Safari Share",
+                    "iosStepOne":  "Safari vich Share button te tap karo.",
+                    "iosStepTwo":  "Add to Home Screen chuno.",
+                    "iosStepThree":  "Nave icon ton app kholo.",
+                    "greetingEyebrow":  "Swagat hai",
+                    "greetingText":  "Assi tuhanu dekh ke bahut khush haan.",
+                    "greetingSubText":  "Apna naam jodo taan jo tuhadiyan photos tuhade naal juriyan rehan poori shaam.",
+                    "noteOne":  "Har bande layi max 20 photos.",
+                    "noteTwo":  "Tusi har photo te note vi add kar sakde ho.",
+                    "enterEvent":  "Andar jao",
+                    "photoAlt":  "Idan te Gurdeep"
+                },
+    "instructions":  {
+                         "eyebrow":  "Kujh chhotiyaan gallan pehlan",
+                         "titleLead":  "Jashan vich dakhil hon ton pehlan",
+                         "titleAccent":  "dyaan rakho",
+                         "body":  "Tusi shaam de douran 20 photos tak share kar sakde ho. Har yaad sab de layi nazar aundi hai, taan jo jashan sanjha te sohna rahe.",
+                         "notes":  "Hun photo lo ya thodi der baad wapas aa ke upload karo.",
+                         "nameTitle":  "Tuhada naam",
+                         "nameLabel":  "Tuhada naam",
+                         "enterEvent":  "Jashan vich dakhil ho"
+                     },
+    "nameGate":  {
+                     "placeholder":  "Tuhada naam",
+                     "save":  "Save karo"
+                 },
+    "app":  {
+                "loading":  "Load ho reha hai...",
+                "placeholder":  "Sanjhe yaadgar lamhe jald hi ithhe nazar aunge.",
+                "linkedTo":  "Photos {name} naal link hon ge.",
+                "linkPrompt":  "Apna naam welcome message vich jodo taan jo photos tuhade naal link ho jaan."
+            },
+    "upload":  {
+                   "upload":  "Upload"
+               },
+    "guest":  "Guest",
+    "capture":  {
+                    "cameraAccessHttps":  "Camera access layi HTTPS ya localhost di lodh hai. Phone te, deployed site ya HTTPS tunnel kholo.",
+                    "cameraAccessUnsupported":  "Eh browser is context vich live camera access support nahin karda.",
+                    "cameraAccessNeeded":  "Photo len layi camera access di lodh hai.",
+                    "noCameraFound":  "Is device te koi camera nahin labbhya.",
+                    "cameraOpenFailed":  "Assi camera nahin khol sake.",
+                    "pleaseWait":  "Thoda jeha wait karo te dobara try karo.",
+                    "cameraStillGettingReady":  "Camera aje vi ready ho reha hai.",
+                    "captureFailed":  "Assi eh photo capture nahin kar sake.",
+                    "cameraOpening":  "Camera khul reha hai...",
+                    "uploadFromPhone":  "Phone ton photo upload karo",
+                    "takePhoto":  "Photo lo",
+                    "switchCamera":  "Camera badlo",
+                    "photoPreview":  "Photo da preview",
+                    "addNote":  "Ik note jodo",
+                    "notePlaceholder":  "Ik chhota note likho...",
+                    "retake":  "Dobara lo",
+                    "sending":  "Bhej reha hai...",
+                    "send":  "Bhejo",
+                    "noteTooLong":  "Ik note {max} akharan tak jodo.",
+                    "photoLimitReached":  "Har guest layi sirf {max} photos allowed ne.",
+                    "uploadFailed":  "Upload fail ho gaya. Kripya dobara try karo."
+                },
+    "tabs":  {
+                 "capture":  "Capture",
+                 "gallery":  "Gallery"
+             },
+    "gallery":  {
+                    "searchPlaceholder":  "Naam naal khojo...",
+                    "clearSearch":  "Khoj saaf karo",
+                    "sortBy":  "Krambadh karo",
+                    "loadingPhotos":  "Photos load ho rahiyaan ne...",
+                    "noUploadedPhotosYet":  "Hale tak koi photo upload nahin hoyi",
+                    "photoBy":  "Photo ton",
+                    "goBack":  "Wapas jao",
+                    "openPhoto":  "Photo kholo",
+                    "sortPhotos":  "Photoan nu krambadh karo",
+                    "newestToOldest":  "Navi ton purani",
+                    "oldestToNewest":  "Purani ton navi",
+                    "loadMore":  "Hor dikhao",
+                    "loadingMore":  "Load ho reha hai...",
+                    "noMore":  "Hor photoan nahin"
+                }
 }

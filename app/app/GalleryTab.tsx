@@ -33,9 +33,9 @@ type SortOrder = "desc" | "asc";
 
 const ROTATIONS = ["-1.5deg", "1.2deg", "-2deg", "1.8deg", "-1deg", "2.2deg"];
 const PAGE_SIZE = 24;
-const SORT_OPTIONS: Array<{ label: string; value: SortOrder }> = [
-  { label: "Newest to oldest", value: "desc" },
-  { label: "Oldest to newest", value: "asc" },
+const SORT_OPTIONS: Array<{ value: SortOrder }> = [
+  { value: "desc" },
+  { value: "asc" },
 ];
 
 function resolvePhotoUrl(data: Record<string, unknown>) {
@@ -313,6 +313,10 @@ export default function GalleryTab() {
     setSelected(photo);
   }
 
+  function displayName(name: string) {
+    return name === "Guest" ? t("guest") : name;
+  }
+
   async function handleCopySelectedPhoto() {
     if (!selected?.src) return;
 
@@ -331,7 +335,7 @@ export default function GalleryTab() {
           <input
             type="text"
             className={styles.searchInput}
-            placeholder="Search by name..."
+            placeholder={t("gallery.searchPlaceholder")}
             value={query}
             onChange={(event) => setQuery(event.target.value)}
           />
@@ -340,7 +344,7 @@ export default function GalleryTab() {
               type="button"
               className={styles.clearBtn}
               onClick={() => setQuery("")}
-              aria-label="Clear search"
+              aria-label={t("gallery.clearSearch")}
             >
               <i className="ti ti-x" aria-hidden="true" />
             </button>
@@ -354,6 +358,7 @@ export default function GalleryTab() {
             onClick={() => setSortMenuOpen((current) => !current)}
             aria-haspopup="menu"
             aria-expanded={sortMenuOpen}
+            aria-label={t("gallery.sortBy")}
           >
             <span>{t("gallery.sortBy")}</span>
             <span className={styles.sortButtonValue}>{sortLabel}</span>
@@ -361,7 +366,11 @@ export default function GalleryTab() {
           </button>
 
           {sortMenuOpen ? (
-            <div className={styles.sortDropdown} role="menu" aria-label="Sort photos">
+            <div
+              className={styles.sortDropdown}
+              role="menu"
+              aria-label={t("gallery.sortPhotos")}
+            >
               {SORT_OPTIONS.map((option) => (
                 <button
                   key={option.value}
@@ -390,7 +399,7 @@ export default function GalleryTab() {
       <div className={styles.galleryScroll} ref={galleryScrollRef}>
         {isLoading ? (
           <div className={styles.emptyState}>
-            <p>Loading photos...</p>
+            <p>{t("gallery.loadingPhotos")}</p>
           </div>
         ) : filtered.length === 0 ? (
           <div className={styles.emptyState}>
@@ -399,7 +408,7 @@ export default function GalleryTab() {
               aria-hidden="true"
               style={{ fontSize: 32, color: "#e2d0b8" }}
             />
-            <p>No uploaded photos yet</p>
+            <p>{t("gallery.noUploadedPhotosYet")}</p>
           </div>
         ) : (
           <>
@@ -413,13 +422,13 @@ export default function GalleryTab() {
                   role="button"
                   tabIndex={0}
                   onKeyDown={(event) => event.key === "Enter" && openPhoto(photo)}
-                  aria-label={`Photo by ${photo.name}`}
+                  aria-label={`${t("gallery.photoBy")} ${displayName(photo.name)}`}
                 >
                   <div className={styles.polaroidImg}>
                     {photo.src ? (
                       <Image
                         src={photo.src}
-                        alt={`Photo by ${photo.name}`}
+                        alt={`${t("gallery.photoBy")} ${displayName(photo.name)}`}
                         fill
                         className={styles.polaroidImgFill}
                         sizes="140px"
@@ -466,7 +475,7 @@ export default function GalleryTab() {
             type="button"
             className={styles.fsClose}
             onClick={() => setSelected(null)}
-            aria-label="Go back"
+            aria-label={t("gallery.goBack")}
           >
             <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.fsCloseIcon}>
               <path d="M14.71 6.71 13.3 5.3 6.6 12l6.7 6.7 1.41-1.41L9.42 12l5.29-5.29Z" />
@@ -477,7 +486,7 @@ export default function GalleryTab() {
             {selected.src ? (
               <Image
                 src={selected.src}
-                alt={`Photo by ${selected.name}`}
+                alt={`${t("gallery.photoBy")} ${displayName(selected.name)}`}
                 fill
                 className={styles.polaroidImgFill}
                 sizes="100vw"
@@ -494,7 +503,7 @@ export default function GalleryTab() {
               type="button"
               className={styles.fsSaveOverlay}
               onClick={() => void handleCopySelectedPhoto()}
-              aria-label="Open photo"
+              aria-label={t("gallery.openPhoto")}
             >
               <Image
                 src="/download-icon.svg"
@@ -510,7 +519,7 @@ export default function GalleryTab() {
 
           <div className={styles.fsBody}>
             <div>
-              <p className={styles.fsName}>{selected.name}</p>
+              <p className={styles.fsName}>{displayName(selected.name)}</p>
               <p className={styles.fsTime}>{selected.time}</p>
             </div>
             {selected.note ? <p className={styles.fsNote}>{selected.note}</p> : null}

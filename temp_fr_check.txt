@@ -1,4 +1,4 @@
-﻿{
+{
   "meta": {
     "title": "Mariage d'Idan et Gurdeep",
     "description": "Bienvenue Ã  la cÃ©lÃ©bration"

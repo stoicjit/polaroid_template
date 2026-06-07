@@ -1,80 +1,116 @@
 {
-  "meta": {
-    "title": "Mariage d'Idan et Gurdeep",
-    "description": "Bienvenue \u00e0 la c\u00e9l\u00e9bration"
-  },
-  "common": {
-    "languageLabel": "Langue",
-    "english": "Anglais",
-    "french": "Fran\u00e7ais",
-    "punjabi": "Pendjabi",
-    "hebrew": "H\u00e9breu",
-    "infoLabel": "Informations",
-    "closeLabel": "Fermer"
-  },
-  "info": {
-    "eyebrow": "Infos rapides",
-    "title": "Infos de l'\u00e9v\u00e9nement",
-    "instructionsTitle": "Comment utiliser l'appli",
-    "instructionsBodyOne": "Seulement 20 photos sont autoris\u00e9es par invit\u00e9.",
-    "instructionsBodyTwo": "Vous pouvez aussi ajouter une petite note \u00e0 chaque photo avant de la partager avec tout le monde.",
-    "uploadTitle": "Fen\u00eatre d'envoi",
-    "uploadBody": "Vous aurez une fen\u00eatre de 24 heures pour envoyer vos photos, afin de partager vos plus beaux moments sans vous presser.",
-    "instructionsBodyThree": "Pour t\u00e9l\u00e9charger une photo, appuyez longuement sur l'image ou touchez le bouton de t\u00e9l\u00e9chargement."
-  },
-  "welcome": {
-    "eyebrow": "Bienvenue \u00e0 la c\u00e9l\u00e9bration",
-    "landingText": "Votre appli pour la soir\u00e9e afin de capturer et de partager les moments, une photo polaroid \u00e0 la fois.",
-    "landingSubText": "Une galerie partag\u00e9e de moments polaroid.",
-    "dateText": "Septembre 2026",
-    "enter": "Entrer",
-    "enterApp": "Entrer dans l'appli",
-    "installBadge": "Installer d'abord",
-    "installHint": "Gardez l'appli de mariage sur l'\u00e9cran d'accueil pour une exp\u00e9rience plus fluide.",
-    "installDescription": "Votre navigateur peut installer cette appli directement ici.",
-    "installCta": "Installer l'appli",
-    "iosInstallHint": "Sur iPhone, ouvrez la feuille de partage puis choisissez Ajouter \u00e0 l'\u00e9cran d'accueil.",
-    "iosShareLabel": "Partage Safari",
-    "iosStepOne": "Touchez le bouton Partager dans Safari.",
-    "iosStepTwo": "Choisissez Ajouter \u00e0 l'\u00e9cran d'accueil.",
-    "iosStepThree": "Ouvrez l'appli depuis la nouvelle ic\u00f4ne.",
-    "greetingEyebrow": "Bienvenue",
-    "greetingText": "Nous sommes tellement heureux de vous avoir ici.",
-    "greetingSubText": "Ajoutez votre nom pour que vos photos restent associ\u00e9es \u00e0 vous tout au long de la soir\u00e9e.",
-    "noteOne": "20 photos max par personne.",
-    "noteTwo": "Vous pouvez ajouter une note \u00e0 chaque photo.",
-    "enterEvent": "Entrer",
-    "photoAlt": "Idan et Gurdeep"
-  },
-  "instructions": {
-    "eyebrow": "Quelques mots avant de commencer",
-    "titleLead": "Avant d'entrer dans",
-    "titleAccent": "la c\u00e9l\u00e9bration",
-    "body": "Vous pouvez partager jusqu'\u00e0 20 photos pendant la soir\u00e9e. Chaque souvenir publi\u00e9 est visible par tout le monde ici, pour que la c\u00e9l\u00e9bration reste chaleureuse et partag\u00e9e.",
-    "notes": "Prenez une photo maintenant ou revenez plus tard pour en t\u00e9l\u00e9verser une.",
-    "nameTitle": "Votre nom",
-    "nameLabel": "Votre nom",
-    "enterEvent": "Entrer dans la c\u00e9l\u00e9bration"
-  },
-  "nameGate": {
-    "placeholder": "Votre nom",
-    "save": "Enregistrer"
-  },
-  "app": {
-    "loading": "Chargement...",
-    "placeholder": "Les souvenirs partag\u00e9s appara\u00eetront bient\u00f4t ici.",
-    "linkedTo": "Les photos seront associ\u00e9es \u00e0 {name}.",
-    "linkPrompt": "Ajoutez votre nom dans le message de bienvenue pour associer vos photos."
-  },
-  "upload": {
-    "upload": "T\u00e9l\u00e9verser"
-  },
-  "gallery": {
-    "sortBy": "Trier par",
-    "newestToOldest": "Du plus r\u00e9cent au plus ancien",
-    "oldestToNewest": "Du plus ancien au plus r\u00e9cent",
-    "loadMore": "Charger plus",
-    "loadingMore": "Chargement...",
-    "noMore": "Plus de photos"
-  }
+    "meta":  {
+                 "title":  "Mariage d\u0027Idan et Gurdeep",
+                 "description":  "Bienvenue à la célébration"
+             },
+    "common":  {
+                   "languageLabel":  "Langue",
+                   "english":  "Anglais",
+                   "french":  "Français",
+                   "punjabi":  "Punjabi",
+                   "hebrew":  "Hébreu",
+                   "infoLabel":  "Informations",
+                   "closeLabel":  "Fermer"
+               },
+    "info":  {
+                 "eyebrow":  "Informations",
+                 "title":  "Infos de l\u0027application",
+                 "instructionsTitle":  "Comment utiliser l\u0027appli",
+                 "instructionsBodyOne":  "Seulement 20 photos sont autorisées par invité.",
+                 "instructionsBodyTwo":  "Ajoutez une courte note a chaque photo avant de la partager avec tout le monde.",
+                 "uploadTitle":  "Fenêtre d\u0027envoi",
+                 "uploadBody":  "Vous aurez une fenêtre de 24 heures pour envoyer vos photos, afin de partager vos plus beaux moments sans vous presser.",
+                 "instructionsBodyThree":  "Pour télécharger une photo, appuyez longuement sur l\u0027image ou touchez le bouton de téléchargement."
+             },
+    "welcome":  {
+                    "eyebrow":  "Bienvenue à la célébration",
+                    "landingText":  "Votre appli pour la soirée afin de capturer et de partager les moments, une photo polaroid à la fois.",
+                    "landingSubText":  "Une galerie partagée de moments polaroid.",
+                    "dateText":  "Septembre 2026",
+                    "enter":  "Entrer",
+                    "enterApp":  "Entrer dans l\u0027appli",
+                    "installBadge":  "Installer d\u0027abord",
+                    "installHint":  "Gardez l\u0027appli de mariage sur l\u0027écran d\u0027accueil pour une expérience plus fluide.",
+                    "installDescription":  "Votre navigateur peut installer cette appli directement ici.",
+                    "installCta":  "Installer l\u0027appli",
+                    "iosInstallHint":  "Sur iPhone, ouvrez la feuille de partage puis choisissez Ajouter à l\u0027écran d\u0027accueil.",
+                    "iosShareLabel":  "Partage Safari",
+                    "iosStepOne":  "Touchez le bouton Partager dans Safari.",
+                    "iosStepTwo":  "Choisissez Ajouter à l\u0027écran d\u0027accueil.",
+                    "iosStepThree":  "Ouvrez l\u0027appli depuis la nouvelle icône.",
+                    "greetingEyebrow":  "Bienvenue",
+                    "greetingText":  "Nous sommes tellement heureux de vous avoir ici.",
+                    "greetingSubText":  "Ajoutez votre nom pour que vos photos restent associées à vous tout au long de la soirée.",
+                    "noteOne":  "20 photos max par personne.",
+                    "noteTwo":  "Vous pouvez ajouter une note à chaque photo.",
+                    "enterEvent":  "Entrer",
+                    "photoAlt":  "Idan et Gurdeep"
+                },
+    "instructions":  {
+                         "eyebrow":  "Quelques mots avant de commencer",
+                         "titleLead":  "Avant d\u0027entrer dans",
+                         "titleAccent":  "la célébration",
+                         "body":  "Vous pouvez partager jusqu\u0027à 20 photos pendant la soirée. Chaque souvenir publié est visible par tout le monde ici, pour que la célébration reste chaleureuse et partagée.",
+                         "notes":  "Prenez une photo maintenant ou revenez plus tard pour en téléverser une.",
+                         "nameTitle":  "Votre nom",
+                         "nameLabel":  "Votre nom",
+                         "enterEvent":  "Entrer dans la célébration"
+                     },
+    "nameGate":  {
+                     "placeholder":  "Votre nom",
+                     "save":  "Enregistrer"
+                 },
+    "app":  {
+                "loading":  "Chargement...",
+                "placeholder":  "Les souvenirs partagés apparaîtront bientôt ici.",
+                "linkedTo":  "Les photos seront associées à {name}.",
+                "linkPrompt":  "Ajoutez votre nom dans le message de bienvenue pour associer vos photos."
+            },
+    "upload":  {
+                   "upload":  "Téléverser"
+               },
+    "guest":  "Invité",
+    "capture":  {
+                    "cameraAccessHttps":  "L\u0027accès à la caméra nécessite HTTPS ou localhost. Sur un téléphone, ouvrez le site déployé ou un tunnel HTTPS.",
+                    "cameraAccessUnsupported":  "Ce navigateur ne prend pas en charge l\u0027accès direct à la caméra dans ce contexte.",
+                    "cameraAccessNeeded":  "L\u0027accès à la caméra est nécessaire pour prendre des photos.",
+                    "noCameraFound":  "Aucune caméra n\u0027a été trouvée sur cet appareil.",
+                    "cameraOpenFailed":  "Nous n\u0027avons pas pu ouvrir la caméra.",
+                    "pleaseWait":  "Veuillez patienter un instant et réessayer.",
+                    "cameraStillGettingReady":  "La caméra est encore en cours de préparation.",
+                    "captureFailed":  "Nous n\u0027avons pas pu capturer cette photo.",
+                    "cameraOpening":  "Ouverture de la caméra...",
+                    "uploadFromPhone":  "Téléverser une photo depuis le téléphone",
+                    "takePhoto":  "Prendre une photo",
+                    "switchCamera":  "Changer de caméra",
+                    "photoPreview":  "Aperçu de la photo",
+                    "addNote":  "Ajouter une note",
+                    "notePlaceholder":  "Écrivez une courte note...",
+                    "retake":  "Reprendre",
+                    "sending":  "Envoi...",
+                    "send":  "Envoyer",
+                    "noteTooLong":  "Ajoutez une note de {max} caractères maximum.",
+                    "photoLimitReached":  "Seulement {max} photos sont autorisées par invité.",
+                    "uploadFailed":  "Le téléversement a échoué. Veuillez réessayer."
+                },
+    "tabs":  {
+                 "capture":  "Capture",
+                 "gallery":  "Galerie"
+             },
+    "gallery":  {
+                    "searchPlaceholder":  "Rechercher par nom...",
+                    "clearSearch":  "Effacer la recherche",
+                    "sortBy":  "Trier par",
+                    "sortPhotos":  "Trier les photos",
+                    "loadingPhotos":  "Chargement des photos...",
+                    "noUploadedPhotosYet":  "Aucune photo téléversée pour le moment",
+                    "photoBy":  "Photo de",
+                    "goBack":  "Retour",
+                    "openPhoto":  "Ouvrir la photo",
+                    "newestToOldest":  "Du plus récent au plus ancien",
+                    "oldestToNewest":  "Du plus ancien au plus récent",
+                    "loadMore":  "Charger plus",
+                    "loadingMore":  "Chargement...",
+                    "noMore":  "Plus de photos"
+                }
 }
