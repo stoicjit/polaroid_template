@@ -89,6 +89,8 @@
                     "retake":  "Reprendre",
                     "sending":  "Envoi...",
                     "send":  "Envoyer",
+                    "uploadsChecking":  "Verification du statut d'envoi...",
+                    "uploadsClosed":  "Les envois sont fermes pour le moment.",
                     "noteTooLong":  "Ajoutez une note de {max} caractères maximum.",
                     "photoLimitReached":  "Seulement {max} photos sont autorisées par invité.",
                     "uploadFailed":  "Le téléversement a échoué. Veuillez réessayer."

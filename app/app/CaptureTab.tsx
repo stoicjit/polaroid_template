@@ -6,6 +6,7 @@ import Image from "next/image";
 import {
   addDoc,
   collection,
+  doc,
   getDocs,
   onSnapshot,
   query as firestoreQuery,
@@ -52,6 +53,8 @@ export default function CaptureTab() {
   const [note, setNote] = useState("");
   const [sendError, setSendError] = useState("");
   const [photoCount, setPhotoCount] = useState(0);
+  const [uploadsEnabled, setUploadsEnabled] = useState(false);
+  const [uploadsStatusLoaded, setUploadsStatusLoaded] = useState(false);
   const guestName = useGuestName();
   const { currentUid, authReady } = useAnonymousAuth();
   const { t } = useI18n();
@@ -71,6 +74,11 @@ export default function CaptureTab() {
     }
 
     async function startCamera() {
+      if (!uploadsEnabled) {
+        stopCameraStream();
+        return;
+      }
+
       if (selectedFile) {
         stopCameraStream();
         return;
@@ -133,7 +141,7 @@ export default function CaptureTab() {
       cancelled = true;
       stopCameraStream();
     };
-  }, [facingMode, selectedFile, t]);
+  }, [facingMode, selectedFile, t, uploadsEnabled]);
 
   useEffect(() => {
     if (!authReady || !currentUid) return undefined;
@@ -157,6 +165,24 @@ export default function CaptureTab() {
   }, [authReady, currentUid]);
 
   useEffect(() => {
+    const settingsRef = doc(db, "settings", "app");
+
+    const unsubscribe = onSnapshot(
+      settingsRef,
+      (snapshot) => {
+        setUploadsEnabled(snapshot.exists() && snapshot.data().uploadsEnabled !== false);
+        setUploadsStatusLoaded(true);
+      },
+      () => {
+        setUploadsEnabled(false);
+        setUploadsStatusLoaded(true);
+      },
+    );
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
     return () => {
       if (previewUrl) {
         URL.revokeObjectURL(previewUrl);
@@ -176,12 +202,22 @@ export default function CaptureTab() {
   }
 
   function handleUploadTrigger() {
+    if (!uploadsEnabled) {
+      setSendError(t("capture.uploadsClosed"));
+      return;
+    }
+
     fileInputRef.current?.click();
   }
 
   async function handleUpload(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
     if (!file) return;
+
+    if (!uploadsEnabled) {
+      setSendError(t("capture.uploadsClosed"));
+      return;
+    }
 
     if (!authReady || !currentUid) {
       setSendError(t("capture.pleaseWait"));
@@ -196,6 +232,11 @@ export default function CaptureTab() {
   }
 
   async function handleCapture() {
+    if (!uploadsEnabled) {
+      setCameraError(t("capture.uploadsClosed"));
+      return;
+    }
+
     if (!videoRef.current || !cameraReady) return;
 
     const video = videoRef.current;
@@ -241,7 +282,7 @@ export default function CaptureTab() {
   }
 
   function handleFlipCamera() {
-    if (uploading) return;
+    if (uploading || !uploadsEnabled) return;
     setFacingMode((currentMode) =>
       currentMode === "environment" ? "user" : "environment",
     );
@@ -250,9 +291,15 @@ export default function CaptureTab() {
   const limitReached = authReady && currentUid ? photoCount >= MAX_PHOTO_UPLOADS : false;
   const remainingPhotos = authReady && currentUid ? Math.max(MAX_PHOTO_UPLOADS - photoCount, 0) : MAX_PHOTO_UPLOADS;
   const remainingCountLabel = `${remainingPhotos}/${MAX_PHOTO_UPLOADS}`;
+  const uploadsBlocked = !uploadsStatusLoaded || !uploadsEnabled;
 
   async function handleSend() {
     if (!selectedFile || !currentUid) return;
+
+    if (!uploadsEnabled) {
+      setSendError(t("capture.uploadsClosed"));
+      return;
+    }
 
     const trimmedNote = note.trim();
     if (!isPhotoNoteValid(trimmedNote)) {
@@ -321,7 +368,13 @@ export default function CaptureTab() {
             />
 
             <div className={styles.cameraOverlay}>
-              {cameraError ? (
+              {uploadsBlocked ? (
+                <div className={styles.cameraMessage}>
+                  {uploadsStatusLoaded
+                    ? t("capture.uploadsClosed")
+                    : t("capture.uploadsChecking")}
+                </div>
+              ) : cameraError ? (
                 <div className={styles.cameraMessage}>{cameraError}</div>
               ) : cameraReady ? (
                 <div className={styles.cameraCount}>{remainingCountLabel}</div>
@@ -337,7 +390,7 @@ export default function CaptureTab() {
               className={styles.uploadThumb}
               onClick={handleUploadTrigger}
               aria-label={t("capture.uploadFromPhone")}
-              disabled={uploading || !authReady || limitReached}
+              disabled={uploading || !authReady || limitReached || uploadsBlocked}
             >
               <i className="ti ti-photo-up" aria-hidden="true" />
             </button>
@@ -347,7 +400,7 @@ export default function CaptureTab() {
               className={styles.shutterBtn}
               onClick={handleCapture}
               aria-label={t("capture.takePhoto")}
-              disabled={uploading || !authReady || !cameraReady || limitReached}
+              disabled={uploading || !authReady || !cameraReady || limitReached || uploadsBlocked}
             >
               <div className={styles.shutterInner} />
             </button>
@@ -357,7 +410,7 @@ export default function CaptureTab() {
               className={styles.switchBtn}
               onClick={handleFlipCamera}
               aria-label={t("capture.switchCamera")}
-              disabled={uploading || !authReady || limitReached}
+              disabled={uploading || !authReady || limitReached || uploadsBlocked}
             >
               <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.switchIcon}>
                 <path d="M7 7h9.5a3.5 3.5 0 0 1 0 7H13" fill="none" />
@@ -399,6 +452,13 @@ export default function CaptureTab() {
                   {note.trim().length}/{MAX_NOTE_LENGTH}
                 </span>
               </div>
+              {uploadsBlocked ? (
+                <p className={styles.captureNotice}>
+                  {uploadsStatusLoaded
+                    ? t("capture.uploadsClosed")
+                    : t("capture.uploadsChecking")}
+                </p>
+              ) : null}
               {sendError ? <p className={styles.captureError}>{sendError}</p> : null}
             </div>
           </div>
@@ -416,7 +476,7 @@ export default function CaptureTab() {
               type="button"
               className={styles.capturePrimary}
               onClick={handleSend}
-              disabled={uploading || !isPhotoNoteValid(note) || limitReached}
+              disabled={uploading || !isPhotoNoteValid(note) || limitReached || uploadsBlocked}
             >
               {uploading ? t("capture.sending") : t("capture.send")}
             </button>

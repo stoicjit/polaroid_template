@@ -90,6 +90,8 @@
                     "retake":  "Dobara lo",
                     "sending":  "Bhej reha hai...",
                     "send":  "Bhejo",
+                    "uploadsChecking":  "Upload status check kar reha hai...",
+                    "uploadsClosed":  "Uploads hun band ne.",
                     "noteTooLong":  "Ik note {max} akharan tak jodo.",
                     "photoLimitReached":  "Har guest layi sirf {max} photos allowed ne.",
                     "uploadFailed":  "Upload fail ho gaya. Kripya dobara try karo."

@@ -271,6 +271,12 @@
   line-height: 1.4;
 }
 
+.captureNotice {
+  font-size: 11px;
+  color: #8a6a47;
+  line-height: 1.4;
+}
+
 .captureActions {
   display: flex;
   gap: 10px;
