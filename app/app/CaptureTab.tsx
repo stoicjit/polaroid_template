@@ -380,7 +380,7 @@ export default function CaptureTab() {
                 <>
                   <div className={styles.cameraCount}>{remainingCountLabel}</div>
                   {limitReached ? (
-                    <div className={styles.cameraMessage}>
+                    <div className={styles.cameraLimitNotice}>
                       {t("capture.photoLimitReachedNotice")}
                     </div>
                   ) : null}
@@ -464,11 +464,6 @@ export default function CaptureTab() {
                   {uploadsStatusLoaded
                     ? t("capture.uploadsClosed")
                     : t("capture.uploadsChecking")}
-                </p>
-              ) : null}
-              {limitReached ? (
-                <p className={styles.captureNotice}>
-                  {t("capture.photoLimitReachedNotice")}
                 </p>
               ) : null}
               {sendError ? <p className={styles.captureError}>{sendError}</p> : null}
