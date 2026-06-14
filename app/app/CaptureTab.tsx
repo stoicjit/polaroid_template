@@ -292,6 +292,7 @@ export default function CaptureTab() {
   const remainingPhotos = authReady && currentUid ? Math.max(MAX_PHOTO_UPLOADS - photoCount, 0) : MAX_PHOTO_UPLOADS;
   const remainingCountLabel = `${remainingPhotos}/${MAX_PHOTO_UPLOADS}`;
   const uploadsBlocked = !uploadsStatusLoaded || !uploadsEnabled;
+  const showThankYouCard = limitReached || (uploadsStatusLoaded && !uploadsEnabled);
 
   async function handleSend() {
     if (!selectedFile || !currentUid) return;
@@ -382,7 +383,7 @@ export default function CaptureTab() {
               )}
             </div>
 
-            {limitReached ? (
+            {showThankYouCard ? (
               <div className={styles.cameraLimitOverlay}>
                 <Image
                   src="/photo-limit-card.png"
