@@ -356,77 +356,85 @@ export default function CaptureTab() {
     <div className={styles.cameraView}>
       {!selectedFile ? (
         <>
-          <div className={styles.cameraStage}>
-            <video
-              ref={videoRef}
-              className={`${styles.cameraFeed} ${
-                facingMode === "user" ? styles.cameraFeedMirrored : ""
-              }`}
-              autoPlay
-              muted
-              playsInline
-            />
-
-            <div className={styles.cameraOverlay}>
-              {uploadsBlocked ? (
-                <div className={styles.cameraMessage}>
-                  {uploadsStatusLoaded
-                    ? t("capture.uploadsClosed")
-                    : t("capture.uploadsChecking")}
-                </div>
-              ) : cameraError ? (
-                <div className={styles.cameraMessage}>{cameraError}</div>
-              ) : cameraReady ? (
-                <>
-                  <div className={styles.cameraCount}>{remainingCountLabel}</div>
-                  {limitReached ? (
-                    <div className={styles.cameraLimitNotice}>
-                      {t("capture.photoLimitReachedNotice")}
-                    </div>
-                  ) : null}
-                </>
-              ) : (
-                <div className={styles.cameraMessage}>{t("capture.cameraOpening")}</div>
-              )}
+          {limitReached ? (
+            <div className={styles.cameraLimitScreen}>
+              <Image
+                src="/photo-limit-card.png"
+                alt={t("capture.photoLimitReachedNotice")}
+                width={1500}
+                height={1000}
+                className={styles.cameraLimitPreview}
+                priority
+              />
             </div>
-          </div>
+          ) : (
+            <>
+              <div className={styles.cameraStage}>
+                <video
+                  ref={videoRef}
+                  className={`${styles.cameraFeed} ${
+                    facingMode === "user" ? styles.cameraFeedMirrored : ""
+                  }`}
+                  autoPlay
+                  muted
+                  playsInline
+                />
 
-          <div className={styles.cameraControls}>
-            <button
-              type="button"
-              className={styles.uploadThumb}
-              onClick={handleUploadTrigger}
-              aria-label={t("capture.uploadFromPhone")}
-              disabled={uploading || !authReady || limitReached || uploadsBlocked}
-            >
-              <i className="ti ti-photo-up" aria-hidden="true" />
-            </button>
+                <div className={styles.cameraOverlay}>
+                  {uploadsBlocked ? (
+                    <div className={styles.cameraMessage}>
+                      {uploadsStatusLoaded
+                        ? t("capture.uploadsClosed")
+                        : t("capture.uploadsChecking")}
+                    </div>
+                  ) : cameraError ? (
+                    <div className={styles.cameraMessage}>{cameraError}</div>
+                  ) : cameraReady ? (
+                    <div className={styles.cameraCount}>{remainingCountLabel}</div>
+                  ) : (
+                    <div className={styles.cameraMessage}>{t("capture.cameraOpening")}</div>
+                  )}
+                </div>
+              </div>
 
-            <button
-              type="button"
-              className={styles.shutterBtn}
-              onClick={handleCapture}
-              aria-label={t("capture.takePhoto")}
-              disabled={uploading || !authReady || !cameraReady || limitReached || uploadsBlocked}
-            >
-              <div className={styles.shutterInner} />
-            </button>
+              <div className={styles.cameraControls}>
+                <button
+                  type="button"
+                  className={styles.uploadThumb}
+                  onClick={handleUploadTrigger}
+                  aria-label={t("capture.uploadFromPhone")}
+                  disabled={uploading || !authReady || uploadsBlocked}
+                >
+                  <i className="ti ti-photo-up" aria-hidden="true" />
+                </button>
 
-            <button
-              type="button"
-              className={styles.switchBtn}
-              onClick={handleFlipCamera}
-              aria-label={t("capture.switchCamera")}
-              disabled={uploading || !authReady || limitReached || uploadsBlocked}
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.switchIcon}>
-                <path d="M7 7h9.5a3.5 3.5 0 0 1 0 7H13" fill="none" />
-                <path d="M12 4 8.5 7 12 10" fill="none" />
-                <path d="M17 17H7.5a3.5 3.5 0 0 1 0-7H11" fill="none" />
-                <path d="M12 20 15.5 17 12 14" fill="none" />
-              </svg>
-            </button>
-          </div>
+                <button
+                  type="button"
+                  className={styles.shutterBtn}
+                  onClick={handleCapture}
+                  aria-label={t("capture.takePhoto")}
+                  disabled={uploading || !authReady || !cameraReady || uploadsBlocked}
+                >
+                  <div className={styles.shutterInner} />
+                </button>
+
+                <button
+                  type="button"
+                  className={styles.switchBtn}
+                  onClick={handleFlipCamera}
+                  aria-label={t("capture.switchCamera")}
+                  disabled={uploading || !authReady || uploadsBlocked}
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.switchIcon}>
+                    <path d="M7 7h9.5a3.5 3.5 0 0 1 0 7H13" fill="none" />
+                    <path d="M12 4 8.5 7 12 10" fill="none" />
+                    <path d="M17 17H7.5a3.5 3.5 0 0 1 0-7H11" fill="none" />
+                    <path d="M12 20 15.5 17 12 14" fill="none" />
+                  </svg>
+                </button>
+              </div>
+            </>
+          )}
         </>
       ) : (
         <div className={styles.captureDraft}>

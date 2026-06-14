@@ -1,5 +1,5 @@
 export const MAX_NOTE_LENGTH = 30;
-export const MAX_PHOTO_UPLOADS = 0;
+export const MAX_PHOTO_UPLOADS = 1;
 
 export function isPhotoNoteValid(note: string) {
   const trimmedNote = note.trim();
