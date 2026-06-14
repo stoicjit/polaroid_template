@@ -130,7 +130,7 @@ export default function CaptureTab() {
             ? t("capture.cameraAccessNeeded")
             : error instanceof Error && error.name === "NotFoundError"
               ? t("capture.noCameraFound")
-            : t("capture.cameraOpenFailed"),
+              : t("capture.cameraOpenFailed"),
         );
       }
     }
@@ -335,14 +335,14 @@ export default function CaptureTab() {
       await uploadBytes(storageRef, selectedFile);
       const url = await getDownloadURL(storageRef);
 
-  await addDoc(collection(db, "photos"), {
-    ownerUid: currentUid,
-    name: guestName.trim() || "Guest",
-    nameLower: (guestName.trim() || "Guest").toLowerCase(),
-    url,
-    note: trimmedNote,
-    createdAt: serverTimestamp(),
-  });
+      await addDoc(collection(db, "photos"), {
+        ownerUid: currentUid,
+        name: guestName.trim() || "Guest",
+        nameLower: (guestName.trim() || "Guest").toLowerCase(),
+        url,
+        note: trimmedNote,
+        createdAt: serverTimestamp(),
+      });
 
       resetDraft();
     } catch {
@@ -359,9 +359,8 @@ export default function CaptureTab() {
           <div className={styles.cameraStage}>
             <video
               ref={videoRef}
-              className={`${styles.cameraFeed} ${
-                facingMode === "user" ? styles.cameraFeedMirrored : ""
-              }`}
+              className={`${styles.cameraFeed} ${facingMode === "user" ? styles.cameraFeedMirrored : ""
+                }`}
               autoPlay
               muted
               playsInline
@@ -405,7 +404,15 @@ export default function CaptureTab() {
               aria-label={t("capture.uploadFromPhone")}
               disabled={uploading || !authReady || uploadsBlocked}
             >
-              <i className="ti ti-photo-up" aria-hidden="true" />
+              <span
+                className={styles.uploadThumbIcon}
+                aria-hidden="true"
+                style={{
+                  fontVariationSettings: "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24",
+                }}
+              >
+                photo_library
+              </span>
             </button>
 
             <button
