@@ -132,10 +132,6 @@
   display: block;
 }
 
-.cameraFeedMirrored {
-  transform: scaleX(-1);
-}
-
 .cameraOverlay {
   position: absolute;
   inset: 0;

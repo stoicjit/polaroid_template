@@ -360,8 +360,7 @@ export default function CaptureTab() {
           <div className={styles.cameraStage}>
             <video
               ref={videoRef}
-              className={`${styles.cameraFeed} ${facingMode === "user" ? styles.cameraFeedMirrored : ""
-                }`}
+              className={styles.cameraFeed}
               autoPlay
               muted
               playsInline
