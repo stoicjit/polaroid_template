@@ -66,8 +66,8 @@ export const metadata: Metadata = {
     title: eventConfig.shortName,
   },
   icons: {
-    icon: "/app_icon.jpg",
-    apple: "/app_icon.jpg",
+    icon: "/app_icon.png",
+    apple: "/app_icon.png",
   },
 };
 

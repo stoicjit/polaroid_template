@@ -1,9 +1,9 @@
 export const eventConfig = {
   title: "Wedding Guest App",
-  shortName: "Wedding",
+  shortName: "Our Night!",
   description: "Capture and share memories from the celebration.",
   coupleNames: ["Gagan", "Pooja"],
-  dateLabel: "Your wedding date",
+  dateLabel: "04.07.2026",
   welcomeBackground: "/photos/photo6.jpg",
   welcomePhotos: [
     { src: "/photos/photo1.jpg", rotate: "-8deg", top: "2%", left: "-8%" },
