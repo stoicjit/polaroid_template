@@ -5,6 +5,7 @@ import CaptureTab from "./CaptureTab";
 import GalleryTab from "./GalleryTab";
 import styles from "./gallery.module.css";
 import { useI18n } from "@/components/I18nProvider";
+import { eventConfig } from "@/lib/event";
 
 export type Tab = "capture" | "gallery";
 
@@ -15,8 +16,8 @@ export default function GalleryPage() {
   return (
     <main className={styles.root}>
       <div className={styles.header}>
-        <p className={styles.headerTitle}>Gurdeep &amp; Idan</p>
-        <p className={styles.headerSub}>13.09.2026</p>
+        <p className={styles.headerTitle}>{eventConfig.coupleNames.join(" & ")}</p>
+        <p className={styles.headerSub}>{eventConfig.dateLabel}</p>
       </div>
 
       <div className={styles.body}>

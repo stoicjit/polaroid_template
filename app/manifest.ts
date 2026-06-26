@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
+import { eventConfig } from "@/lib/event";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Idan & Gurdeep's Wedding",
-    short_name: "Our Night!",
-    description: "Capture and share wedding memories together.",
+    name: eventConfig.title,
+    short_name: eventConfig.shortName,
+    description: eventConfig.description,
     start_url: "/welcome",
     scope: "/",
     display: "standalone",

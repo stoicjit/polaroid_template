@@ -1,14 +1,12 @@
 {
   "meta": {
-    "title": "Idan & Gurdeep's Wedding",
+    "title": "Wedding Guest App",
     "description": "Welcome to the celebration"
   },
   "common": {
     "languageLabel": "Language",
     "english": "English",
-    "french": "French",
     "punjabi": "Punjabi",
-    "hebrew": "Hebrew",
     "infoLabel": "Information",
     "closeLabel": "Close"
   },
@@ -26,7 +24,7 @@
     "eyebrow": "Welcome to the celebration of",
     "landingText": "Your app for the night to capture and share moments, one polaroid at a time.",
     "landingSubText": "A shared gallery of polaroid moments.",
-    "dateText": "September 2026",
+    "dateText": "Your wedding date",
     "enter": "Enter",
     "enterApp": "Enter app",
     "installBadge": "Install first",
@@ -44,7 +42,7 @@
     "noteOne": "Max 20 photos per person.",
     "noteTwo": "You can add a note to any photo.",
     "enterEvent": "Enter",
-    "photoAlt": "Idan and Gurdeep"
+    "photoAlt": "Wedding couple"
   },
   "instructions": {
     "eyebrow": "A few gentle notes",
@@ -117,3 +115,4 @@
     "noMore": "No more photos"
   }
 }
+

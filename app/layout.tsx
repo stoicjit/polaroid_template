@@ -13,6 +13,7 @@ import InfoDialog from "@/components/InfoDialog";
 import LanguageSelector from "@/components/LanguageSelector";
 import ServiceWorkerRegistrar from "@/components/ServiceWorkerRegistrar";
 import en from "@/locales/en.json";
+import { eventConfig } from "@/lib/event";
 import "../styles/globals.css";
 
 const cormorantGaramond = Cormorant_Garamond({
@@ -56,13 +57,13 @@ const permanentMarker = Permanent_Marker({
 });
 
 export const metadata: Metadata = {
-  title: en.meta.title,
-  description: en.meta.description,
+  title: eventConfig.title ?? en.meta.title,
+  description: eventConfig.description ?? en.meta.description,
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Our Night!",
+    title: eventConfig.shortName,
   },
   icons: {
     icon: "/app_icon.jpg",

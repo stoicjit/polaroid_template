@@ -31,9 +31,7 @@ export default function LanguageSelector() {
 
   const languages: { code: Locale; label: string }[] = [
     { code: "en", label: t("common.english") },
-    { code: "fr", label: t("common.french") },
     { code: "pa", label: t("common.punjabi") },
-    { code: "he", label: t("common.hebrew") },
   ];
 
   return (

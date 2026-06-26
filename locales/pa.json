@@ -1,14 +1,12 @@
 {
     "meta":  {
-                 "title":  "Idan ate Gurdeep da Viyah",
+                 "title":  "Viyah Guest App",
                  "description":  "Jashan vich tuhada swaagat hai"
              },
     "common":  {
                    "languageLabel":  "Bhasha",
                    "english":  "Angrezi",
-                   "french":  "French",
                    "punjabi":  "Punjabi",
-                   "hebrew":  "Ibrani",
                    "infoLabel":  "Jankari",
                    "closeLabel":  "Band karo"
                },
@@ -27,7 +25,7 @@
                     "eyebrow":  "jashan vich tuhadda swaagat hai",
                     "landingText":  "Raat layi tuhadi app, moments nu capture te share karan lai, ik polaroid de naal ik polaroid.",
                     "landingSubText":  "Polaroid lamhan di ik sanjhi gallery.",
-                    "dateText":  "September 2026",
+                    "dateText":  "Viyah di tareekh",
                     "enter":  "Andar jao",
                     "enterApp":  "App kholo",
                     "installBadge":  "Pehlaan install karo",
@@ -45,7 +43,7 @@
                     "noteOne":  "Har bande layi max 20 photos.",
                     "noteTwo":  "Tusi har photo te note vi add kar sakde ho.",
                     "enterEvent":  "Andar jao",
-                    "photoAlt":  "Idan te Gurdeep"
+                    "photoAlt":  "Viyah jodi"
                 },
     "instructions":  {
                          "eyebrow":  "Kujh chhotiyaan gallan pehlan",
@@ -118,3 +116,7 @@
                     "noMore":  "Hor photoan nahin"
                 }
 }
+
+
+
+

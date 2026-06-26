@@ -1,9 +1,7 @@
 import en from "@/locales/en.json";
-import fr from "@/locales/fr.json";
-import he from "@/locales/he.json";
 import pa from "@/locales/pa.json";
 
-export const dictionaries = { en, fr, pa, he };
+export const dictionaries = { en, pa };
 
 export type Locale = keyof typeof dictionaries;
 export type TranslationDictionary = (typeof dictionaries)[Locale];

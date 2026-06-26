@@ -3,7 +3,7 @@
   height: 100svh;
   width: 100%;
   overflow: hidden;
-  background: #faf7f2 url('/photos/att.Um5AYo6U4oJp0EcqIKGWoL80kvfLpQJTWZF9O6jKW-o.jpeg') center center / cover no-repeat;
+  background: #faf7f2 center center / cover no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -422,3 +422,4 @@
   opacity: 0.45;
   cursor: not-allowed;
 }
+

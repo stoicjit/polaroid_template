@@ -4,13 +4,23 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBi8vmnzItX6TODb0EkVcH-6LJVDjO8axE",
-  authDomain: "wedding-memory-app-46ee4.firebaseapp.com",
-  projectId: "wedding-memory-app-46ee4",
-  storageBucket: "wedding-memory-app-46ee4.firebasestorage.app",
-  messagingSenderId: "566067509613",
-  appId: "1:566067509613:web:7f791b2ca2494126990264",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
+
+const requiredKeys = Object.entries(firebaseConfig)
+  .filter(([, value]) => !value)
+  .map(([key]) => key);
+
+if (requiredKeys.length > 0) {
+  throw new Error(
+    `Missing Firebase env vars: ${requiredKeys.join(", ")}. Copy .env.example to .env.local and fill in your project values.`,
+  );
+}
 
 const app = initializeApp(firebaseConfig);
 

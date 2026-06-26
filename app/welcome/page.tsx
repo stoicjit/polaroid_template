@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore, type MouseEvent } from "react";
+import {
+  useEffect,
+  useState,
+  useSyncExternalStore,
+  type CSSProperties,
+  type MouseEvent,
+} from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import InstallGate from "@/components/InstallGate";
@@ -12,23 +18,8 @@ import {
   saveGuestOnboardingComplete,
   useGuestOnboardingComplete,
 } from "@/lib/guest";
+import { eventConfig } from "@/lib/event";
 import styles from "./page.module.css";
-
-const polaroids: Array<{
-  src: string;
-  rotate: string;
-  top?: string;
-  bottom?: string;
-  left?: string;
-  right?: string;
-}> = [
-    { src: "/photos/photo1.jpg", rotate: "-8deg", top: "2%", left: "-8%" },
-    { src: "/photos/photo2.png", rotate: "9deg", top: "1%", right: "-9%" },
-    { src: "/photos/photo3.jpg", rotate: "-5deg", top: "35%", left: "-8%" },
-    { src: "/photos/photo4.png", rotate: "5deg", top: "33%", right: "-8%" },
-    { src: "/photos/photo1.jpg", rotate: "8deg", bottom: "5%", left: "-7%" },
-    { src: "/photos/photo2.png", rotate: "-8deg", bottom: "6%", right: "-6%" },
-  ];
 
 function isStandaloneMode() {
   if (typeof window === "undefined") {
@@ -99,20 +90,44 @@ export default function Welcome() {
     router.replace("/app");
   };
 
+  const buildPolaroidStyle = (p: (typeof eventConfig.welcomePhotos)[number], i: number) => {
+    const style: CSSProperties & {
+      "--base-rotate": string;
+      "--float-delay": string;
+    } = {
+      "--base-rotate": p.rotate,
+      "--float-delay": `${i * -2.8}s`,
+    };
+
+    if ("top" in p) {
+      style.top = p.top;
+    }
+
+    if ("bottom" in p) {
+      style.bottom = p.bottom;
+    }
+
+    if ("left" in p) {
+      style.left = p.left;
+    }
+
+    if ("right" in p) {
+      style.right = p.right;
+    }
+
+    return style;
+  };
+
   return (
-    <main className={styles.root}>
-      {polaroids.map((p, i) => (
+    <main
+      className={styles.root}
+      style={{ backgroundImage: `url(${eventConfig.welcomeBackground})` }}
+    >
+      {eventConfig.welcomePhotos.map((p, i) => (
         <div
           key={i}
           className={styles.polaroidWrap}
-          style={{
-            top: p.top,
-            bottom: p.bottom,
-            left: p.left,
-            right: p.right,
-            ["--base-rotate" as string]: p.rotate,
-            ["--float-delay" as string]: `${i * -2.8}s`,
-          }}
+          style={buildPolaroidStyle(p, i)}
         >
           <div className={styles.polaroid}>
             <div className={styles.polaroidImg}>
@@ -132,9 +147,9 @@ export default function Welcome() {
         <p className={styles.eyebrow}>{t("welcome.eyebrow")}</p>
 
         <h1 className={styles.names}>
-          <span className={styles.nameLine1}>Gurdeep</span>
+          <span className={styles.nameLine1}>{eventConfig.coupleNames[0]}</span>
           <span className={styles.amp}>&amp;</span>
-          <span className={styles.nameLine}>Idan</span>
+          <span className={styles.nameLine}>{eventConfig.coupleNames[1]}</span>
         </h1>
 
         <div className={styles.divider}>
@@ -173,23 +188,13 @@ export default function Welcome() {
         <div className={styles.overlay} role="presentation">
           <div className={styles.greetingSheet} role="dialog" aria-modal="true">
             <div className={styles.greetingPolaroids}>
-              {polaroids.slice(0, 2).map((p, index) => (
+              {eventConfig.welcomePhotos.slice(0, 2).map((p, index) => (
                 <div
                   key={`${p.src}-${index}`}
                   className={styles.greetingPolaroidWrap}
                   style={{ transform: `rotate(${p.rotate})` }}
                 >
-                  {/* <div className={styles.greetingPolaroid}>
-                    <div className={styles.greetingPolaroidImg}>
-                      <Image
-                        src={p.src}
-                        alt={t("welcome.photoAlt")}
-                        fill
-                        className={styles.img}
-                        sizes="110px"
-                      />
-                    </div>
-                  </div> */}
+                  {/* Template keeps this as a decorative shell for future wedding photos. */}
                 </div>
               ))}
             </div>
